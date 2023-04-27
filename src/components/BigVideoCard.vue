@@ -32,14 +32,16 @@
         <!-- :src="'https://apis.netstart.cn/xpc/media/' + video.resource.video_library_id" -->
         <!-- https://us-xpc5.xpccdn.com/af035d5d-3d0e-4866-a448-44355a69f7d4.mp4 -->
         <!-- :src="video.resource.video_library_id" -->
-        <video
+        <!-- <video
           muted
           autoplay
           playsinline
           :poster="video.resource.cover"
         >
           <source :src="video.resource.video_library_id" type="video/mp4">
-        </video>
+        </video> -->
+        <!-- change -->
+        <img v-lazy="video.resource.cover"/>
         <!-- 4k -->
         <span class="resolution_type" v-if="video.resource.resolution_type != ''">{{video.resource.resolution_type}}</span>
         <span class="count_view-duration">{{getVideoCount(video.resource.count.count_view)}}观看 | {{getVideoDuration(video.resource.duration)}}</span>
@@ -175,6 +177,12 @@ const {getVideoDuration, getVideoCount, strLength} = useVideoCount()
     position: relative;
 
     video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    // change:
+    img {
       width: 100%;
       height: 100%;
       object-fit: cover;
