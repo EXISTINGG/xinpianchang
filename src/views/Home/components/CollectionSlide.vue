@@ -1,5 +1,5 @@
 <template>
-  <van-swipe class="swipe" :width="140" :show-indicators="false" :duration="1000">
+  <van-swipe class="swipe" :width="160" :loop="false" :show-indicators="false" :duration="500">
           <van-swipe-item class="swipe-item" v-for="item in collection" :key="item.model.resource.id">
             <div class="author-box">
               <div class="avator-v">
@@ -38,11 +38,11 @@ const props = defineProps({
 <style lang="scss">
     .swipe {
   width: 100%;
-  height: 150px;
+  height: 170px;
   margin: 10px 0;
 
   .swipe-item {
-  width: 130px !important;
+  width: 150px !important;
   height: 100%;
   border-radius: 5px;
   background: #fff;

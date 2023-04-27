@@ -1,7 +1,7 @@
 <template>
   <!-- 视频 -->
   <div class="video-box">
-    <video controls autoplay muted>
+    <video controls autoplay>
       <source v-for="item in videoArticleStore.videoArticle.video.content.progressive" :key="item.id" :src="item.url" type="video/mp4" v-if="videoArticleStore.videoArticle.length != 0"/>
       <!-- <source src="video.webm" type="video/webm" />
       <source src="video.ogv" type="video/ogg" /> -->
