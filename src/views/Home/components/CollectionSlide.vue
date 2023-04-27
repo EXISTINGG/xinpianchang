@@ -7,7 +7,7 @@
                 <span class="author-v-img" :class="item.model.resource.author_type === 1 ? 'author-blue-v' : 'author-yellow-v'" v-if="item.model.resource.author_type != 0"></span>
               </div>
               <div class="name-vip">
-                <text class="name">{{item.model.resource.username}}</text>&nbsp;
+                <text class="name">{{strLength(item.model.resource.username) > 8 ? item.model.resource.username.substring(0,4) + '···' : item.model.resource.username}}</text>&nbsp;
                 <span class="vip-img" :class="item.model.resource.vip_status === 1 ? 'vip-size' : 'svip-size'" v-if="item.model.resource.vip_status != 0"></span>
               </div>
               <div class="count">
@@ -23,6 +23,9 @@
 </template>
 
 <script setup lang="ts">
+import useVideoCount from '@/hooks/useVideoCount.ts'
+const {strLength} = useVideoCount()
+
 // 接收父组件的数据
 const props = defineProps({
   collection: {
