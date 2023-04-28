@@ -3,20 +3,20 @@ $color-collected: #f4af26;
 $color-liked: #cf5548;
 $color-background: #f7f7f7;
 // author_type: 2 yellow
-$author-yellow-v: 'public/image/yellow-v.png';
+$author-yellow-v: '@/assets/icon/yellow-v.png';
 // author_type: 1 blue
-$author-blue-v: 'public/image/blue-v.png';
+$author-blue-v: '@/assets/icon/blue-v.png';
 // vip-icon 
 // vip_flag:0 vip_status:0 novip
 // vip_flag:1 vip_status(是否是会员):1 vip
 // $sup-vip: vip_flag: 3 vip_status:2 svip
-$vip-icon: 'public/image/vip-icon.png';
-$sup-vip: 'public/image/sup-vip.png';
+$vip-icon: '@/assets/icon/vip-icon.png';
+$sup-vip: '@/assets/icon/sup-vip.png';
 // ranks[0].code === 'staffPicks' pick
 // $staff-pick: '';
 // recommend_type: 0 none
 // recommend_type: 1 
-$xpc-picks: 'src/assests/icon/xpc-picks.svg'
+// $xpc-picks: 'src/assets/icon/xpc-picks.svg'
 
 // html {
 //   justify-content: center ;

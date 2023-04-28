@@ -51,6 +51,7 @@ const {getVideoDuration,getVideoCount,strLength} = useVideoCount()
     img {
       @extend .video-poster;
       height: 85px;
+      border: .5px solid #ccc;
     }
 
     .video-duration {

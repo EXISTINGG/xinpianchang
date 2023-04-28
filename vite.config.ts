@@ -15,9 +15,6 @@ export default defineConfig({
   css: {
     // 使用 less
     preprocessorOptions: {
-    //   less: {
-    //     javascriptEnabled: true
-    //   }
     scss: {
       additionalData: '@import "@/assets/styles/global.scss";'
     }
@@ -25,7 +22,7 @@ export default defineConfig({
   },
   resolve: {
     //配置文件扩展名
-    extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],
+    extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json","scss"],
     // Vite路径别名配置
     alias: {
       "@": path.resolve(__dirname, './src'),

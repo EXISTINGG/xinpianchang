@@ -64,6 +64,7 @@ const {getVideoDuration, getVideoCount, strLength} = useVideoCount()
       object-fit: cover;
       width: 100%;
       height: 100%;
+      border: .5px solid #ccc;
     }
 
     .collect-like-duration {

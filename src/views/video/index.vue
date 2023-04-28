@@ -21,12 +21,15 @@ const videoArticleStore = useVideoArticleStore()
 
 <style lang="scss" scoped>
 .video-box {
+  z-index: 9999;
   height: 200px;
   width: 100%;
 
   video {
     @extend .video-box;
-    object-fit: fill;
+    object-fit: contain;
+    // object-fit: fill;
+    // object-fit: cover;
   }
 }
 </style>

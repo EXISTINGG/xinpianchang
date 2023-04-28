@@ -63,6 +63,7 @@ const props = defineProps({
       width: 40px;
       height: 40px;
       border-radius: 50%;
+      border: .5px solid #ccc;     
     }
     .author-v-img {
       position: absolute;

@@ -6,8 +6,8 @@
 入场必看页面无loadMoreUrl
 推荐页面的vlog,古风数据为null
 todo...
-加载成功10秒,一直加载中(定时器解决)
 pick-icon
+路由跳转问题,时间处理,静态资源图标
 
 # Vue 3 + TypeScript + Vite
 
