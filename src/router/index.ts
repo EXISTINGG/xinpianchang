@@ -6,6 +6,7 @@ const routes: Array<RouteRecordRaw> = [
 	// 首页
 	{
 		path: '/home',
+		name: 'home',
 		component: () => import('@/views/Home/index.vue'),
 		redirect: '/home/recommend',
 		children: [

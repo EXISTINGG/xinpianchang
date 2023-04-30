@@ -3,6 +3,7 @@ interface VideoCountProps {
   getVideoDuration?: (time: number) => void
   getVideoCount?: (data: number) => void
   strLength?: (str: string) => void
+  formatTime?: (timestamp: number) => string
   // setItem?: (key: string, data: {}) => void
   // getItem?: (key: string) => void
 }
@@ -45,12 +46,32 @@ export default ():VideoCountProps => {
     return len;
     }
 
-
+    // 处理时间
+    const formatTime = (timestamp: number): string => {
+      const now = new Date();
+      const dt = new Date(timestamp * 1000);
+      const diff = now.getTime() - dt.getTime();
+    
+      if (diff < 24 * 60 * 60 * 1000) {
+        if (dt.getDate() === now.getDate() - 1) {
+          return `昨天${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}`;
+        } else if (diff < 60 * 60 * 1000) {
+          return `${Math.floor(diff / (60 * 1000))}分钟前`;
+        } else {
+          return `${Math.floor(diff / (60 * 60 * 1000))}小时前`;
+        }
+      } else {
+        return `${dt.getFullYear()}-${(dt.getMonth() + 1).toString().padStart(2, '0')}-${dt.getDate().toString().padStart(2, '0')}`;
+      }
+    }
+    
+    
   
 // 返回数据
 return {
   getVideoDuration,
   getVideoCount,
   strLength,
+  formatTime
 }
 }

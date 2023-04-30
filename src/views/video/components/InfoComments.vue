@@ -1,6 +1,6 @@
-<template>
-  <van-tabs v-model:active="active" color="#e74b3b" animated swipeable>
-    <van-tab title="简介">
+<!-- <template>
+  <van-tabs v-model:active="active" color="#e74b3b" animated swipeable sticky :offset-top="videoHeight">
+    <van-tab title="简介" class="top">
       <VideoInfo />
     </van-tab>
     <van-tab title="评论">
@@ -10,16 +10,24 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue'
+import {ref, onMounted} from 'vue'
 import VideoInfo from './VideoInfo.vue'
 import Comments from '@/components/Comments.vue'
 
-const active = ref(0)
-</script>
+// 接收父组件的数据
+const props = defineProps({
+  video: {
+    type: Number,
+    required: true
+  }
+})
+console.log(props.video);
 
-<style>
-/* .top {
-  margin-top: 0.53333rem + 5.33333rem 5.86666rem;
-  offset-top="5.33333rem"	
-} */
-</style>
+const active = ref(0)
+const videoHeight = ref(0)
+onMounted(() => {
+  videoHeight.value = props.videoHeight
+  console.log(props.video);
+})
+</script>
+ -->

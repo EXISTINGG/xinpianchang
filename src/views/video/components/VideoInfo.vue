@@ -1,13 +1,12 @@
 <template>
   <div class="item-box" v-if="videoArticleStore.videoArticle.length != 0">
-    视频信息
     <div class="intro-box">
       <div class="title">
         <h1>{{videoArticleStore.videoArticle.title}}</h1>
       </div>
       <div class="video-type-time-ip">
         <span class="categories" v-for="(item, i) in videoArticleStore.videoArticle.categories" :key="i">{{item.category_name}}-{{item.sub.category_name}}</span>
-        <span class="time">{{videoArticleStore.videoArticle.publish_time}} </span><span class="ip" v-if="videoArticleStore.videoArticle.ip_location != ''">&nbsp;·&nbsp; {{ videoArticleStore.videoArticle.ip_location}}</span>
+        <span class="time">{{formatTime(videoArticleStore.videoArticle.publish_time)}} </span><span class="ip" v-if="videoArticleStore.videoArticle.ip_location != ''">&nbsp;·&nbsp; {{ videoArticleStore.videoArticle.ip_location}}</span>
         <span class="video-view">{{getVideoCount(videoArticleStore.videoArticle.count.count_view)}}次播放</span>
       </div>
       <div class="content">
@@ -113,15 +112,18 @@ const downloadIcon = download
 
 import {ref,onMounted} from 'vue'
 import {useVideoArticleStore} from '@/store/videoArticle.ts'
-import {useRouter} from 'vue-router'
+import {useRouter,useRoute} from 'vue-router'
 import useVideoCount from '@/hooks/useVideoCount.ts'
 import VideoCard from '@/components/VideoCard.vue'
 
 const videoArticleStore = useVideoArticleStore()
 const router = useRouter()
-const {getVideoCount, strLength} = useVideoCount()
+const route = useRoute()
+const {getVideoCount, strLength,formatTime} = useVideoCount()
 
 const id = ref(router.currentRoute.value.params.id)
+console.log(route.params.id);
+console.log(router.currentRoute.value.params.id);
 
 videoArticleStore.videoArticle = []
 videoArticleStore.similarVidoe = []

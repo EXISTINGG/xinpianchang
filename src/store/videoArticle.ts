@@ -8,6 +8,9 @@ export const useVideoArticleStore = defineStore('videoArticle', {
       similarVidoe: [] as any,
       commentsList: [] as any,
       loadMoreUrl: '',
+      refreshing: false,
+      finished: false,
+      loading: false,
     }
   },
 
@@ -34,12 +37,32 @@ export const useVideoArticleStore = defineStore('videoArticle', {
     },
 
     // 加载更多
-    async getMoreList() {
-      if(this.loadMoreUrl == '') return
+    async getMoreList(onRefresh: boolean) {
+      if(this.loadMoreUrl == '') {
+        this.refreshing = false   
+        this.finished = false 
+        return this.loading = false
+      }
       const {data} = await getMore(this.loadMoreUrl)
       console.log(data);
-      // this.commentsList = data.data.list
+      if(onRefresh) {
+        this.commentsList.splice(0, 0, ...data.data.list)
+        // this.commentsList = data.data.list
+      } else {
+        this.commentsList.splice(this.commentsList.length, 0, ...data.data.list)
+        // this.commentsList = data.data.list
+      }
+      
+      this.refreshing = false   
+      this.finished = false 
+      this.loading = false
+
       this.loadMoreUrl = data.data.next_page_url
+
+        if (data.data.next_page_url == null) {
+          this.loadMoreUrl = ''
+          this.refreshing = true
+        }
     }
   }
 })
