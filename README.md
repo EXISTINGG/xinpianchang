@@ -1,6 +1,6 @@
 # 项目预览地址(尚未完成)
 [移动端](https://xpc.hxq-001.top)
-
+各浏览器视频详情页可能会有bug(浏览器自动固定视频位置,造成tab会隐藏)
 # 技术栈
 Vue3+TypeScript(anyScript😁)+VueRouter+Pinia+Axios+Scss+Vant
 
