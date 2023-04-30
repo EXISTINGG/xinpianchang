@@ -58,7 +58,7 @@ commentNum.value = videoArticleStore.commentsList.length
   video {
     @extend .video-box;
     object-fit: contain;
-    max-height:700px;
+    max-height:300px;
     // object-fit: fill;
     // object-fit: cover;
     // position: fixed;
