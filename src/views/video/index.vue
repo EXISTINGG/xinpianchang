@@ -1,7 +1,7 @@
 <template>
   <!-- 视频 -->
   <div class="video-box">
-    <video controls autoplay ref="videoRef" @loadedmetadata="getVideo">
+    <video controls autoplay ref="videoRef"  @loadedmetadata="getVideo">
       <source v-for="item in videoArticleStore.videoArticle.video.content.progressive" :key="item.id" :src="item.url" type="video/mp4" v-if="videoArticleStore.videoArticle.length != 0"/>
       <!-- <source src="video.webm" type="video/webm" />
       <source src="video.ogv" type="video/ogg" /> -->
@@ -50,20 +50,19 @@ commentNum.value = videoArticleStore.commentsList.length
 <style lang="scss" scoped>
 .video-box {
   z-index: 9999;
-  // height: 200px;
   width: 100%;
   position: fixed;
   top: 0;
+  background-color: black;
+
+// http://localhost:5173/#/video/10948059
 
   video {
     @extend .video-box;
     object-fit: contain;
-    max-height:300px;
+    max-height: 350px;
     // object-fit: fill;
     // object-fit: cover;
-    // position: fixed;
-    // top: 0;
-
   }
 }
 .tabs {
