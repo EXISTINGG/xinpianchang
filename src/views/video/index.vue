@@ -42,6 +42,7 @@ onMounted(() => {
 commentNum.value = videoArticleStore.commentsList.length
 })
 onUpdated(() => {
+getVideo()
 commentNum.value = videoArticleStore.commentsList.length
 })
 </script>
