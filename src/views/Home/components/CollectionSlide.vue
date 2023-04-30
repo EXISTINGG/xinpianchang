@@ -11,7 +11,7 @@
                 <span class="vip-img" :class="item.model.resource.vip_status === 1 ? 'vip-size' : 'svip-size'" v-if="item.model.resource.vip_status != 0"></span>
               </div>
               <div class="count">
-                <div>{{item.model.resource.count.count_article}}作品 · {{item.model.resource.count.count_follower}} 粉丝</div>
+                <div>{{item.model.resource.count.count_article}}作品 · {{getVideoCount(item.model.resource.count.count_follower)}} 粉丝</div>
                 <div>{{item.model.resource.occupation}}</div>
               </div>
               <div class="follow">
@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import useVideoCount from '@/hooks/useVideoCount.ts'
-const {strLength} = useVideoCount()
+const {strLength,getVideoCount} = useVideoCount()
 
 // 接收父组件的数据
 const props = defineProps({
