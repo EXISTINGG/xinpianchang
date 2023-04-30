@@ -1,5 +1,4 @@
 <template>
-cateRecommend
 <div v-if="videoDataStore.banner.length != 0">
   <Banner />
 </div>

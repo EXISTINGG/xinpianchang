@@ -14,9 +14,6 @@
         :key="item.title"
         :title="item.title"
       >
-        {{ item.link }}
-        <hr />
-
         <van-pull-refresh v-model="videoDataStore.refreshing" @refresh="onRefresh">
           <van-list
             v-model:loading="videoDataStore.loading"

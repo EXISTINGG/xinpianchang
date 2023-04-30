@@ -8,9 +8,8 @@
     </video>
   </div>
   <!-- 视频简介/评论tab -->
-  <!-- <InfoComments :video="videoHeight"/> -->
    <!-- + .00001 解决需要滑动一下才出现tab的bug -->
-  <van-tabs class="tabs" v-model:active="active" color="#e74b3b" animated swipeable sticky :offset-top="videoHeight + .00001">
+  <van-tabs class="tabs" v-model:active="active" color="#e74b3b" animated swipeable sticky  :offset-top="videoHeight + .00001">
     <van-tab title="简介" :style="{marginTop: tabHeight + 'px'}">
       <VideoInfo />
     </van-tab>
@@ -27,7 +26,6 @@ import {useVideoArticleStore} from '@/store/videoArticle.ts'
 import VideoInfo from './components/VideoInfo.vue'
 import Comments from '@/components/Comments.vue'
 
-// import InfoComments from './components/InfoComments.vue'
 const active = ref(0)
 const videoRef = ref(null)
 const videoHeight = ref(0)

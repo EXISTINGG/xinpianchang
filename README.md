@@ -1,8 +1,8 @@
 # 项目预览地址(尚未完成)
-[移动端](https:xpc.hxq-001.top)
+[移动端](https://xpc.hxq-001.top)
 
 # 技术栈
-Vue3+TypeScript(anyScript😁)+VueRouter+Pinia+Axios+Scss
+Vue3+TypeScript(anyScript😁)+VueRouter+Pinia+Axios+Scss+Vant
 
 # 项目说明
 1. 添加分类的loadMoreUrl,自动增加page数,无需更改

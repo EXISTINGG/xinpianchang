@@ -1,5 +1,4 @@
 <template>
-MustSee
 <div calss="big-video">
   <BigVideoCard v-for="item in videoDataStore.videoData.mustVideo" :key="item.children[0].model.resource.id" :video="item.children[0].model"/>
 </div>

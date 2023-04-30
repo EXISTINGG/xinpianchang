@@ -1,5 +1,4 @@
 <template>
-hot
 <Banner />
 <!-- 分类选项 -->
 <section class="hot-function">

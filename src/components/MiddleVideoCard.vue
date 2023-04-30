@@ -1,5 +1,4 @@
 <template>
-<!-- :to="video.resource.url" -->
 <router-link :to="`/video/${video.resource.id}`">
   <div class="middlecard-box">
     <div class="video-cover">
