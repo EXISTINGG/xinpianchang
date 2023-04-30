@@ -39,6 +39,7 @@ const getVideo = () => {
 }
 
 onMounted(() => { 
+getVideo()
 commentNum.value = videoArticleStore.commentsList.length
 })
 onUpdated(() => {
