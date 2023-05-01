@@ -122,14 +122,15 @@ const route = useRoute()
 const {getVideoCount, strLength,formatTime} = useVideoCount()
 
 const id = ref(router.currentRoute.value.params.id)
-console.log(route.params.id);
-console.log(router.currentRoute.value.params.id);
+
 
 videoArticleStore.videoArticle = []
 videoArticleStore.similarVidoe = []
 onMounted(() => {
   videoArticleStore.getVideoArticeList(id.value)
-  videoArticleStore.getSimilarVidoeList(id.value)
+  setTimeout(() => {
+    videoArticleStore.getSimilarVidoeList(id.value)
+  }, 500);
 })
 </script>
 

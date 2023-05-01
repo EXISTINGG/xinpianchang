@@ -37,20 +37,18 @@ const getVideo = () => {
   videoHeight.value = videoRef.value.offsetHeight
   tabHeight.value = videoHeight.value
 }
-console.log('created');
 
-getVideo()
+const timer = () => setTimeout(() => {
+  getVideo()
+}, 500);
 
 onMounted(() => { 
-  console.log('onMounted');
-  
-getVideo()
+timer()
 commentNum.value = videoArticleStore.commentsList.length
 })
+
 onUpdated(() => {
-  console.log('onUpdated');
-  
-getVideo()
+timer()
 commentNum.value = videoArticleStore.commentsList.length
 })
 </script>
