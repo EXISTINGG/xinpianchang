@@ -142,10 +142,15 @@ export const useVideoDataStore = defineStore('videoData', {
     },
 
     // discover页面分类
-    async getCateArticles(id: string) {
+    async getCateArticles(id: string, isAll?: boolean) {
       const {data} = await getCateArticles(id)
       console.log(data);
-      this.changeCateVideo(data, true, id)
+      if (isAll) {
+        // 全部
+        this.changeCateVideo(data, false, id)
+      } else {
+        this.changeCateVideo(data, true, id)
+      }
     },
 
     // 加载更多-分类

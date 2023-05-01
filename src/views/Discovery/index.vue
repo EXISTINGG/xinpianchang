@@ -17,7 +17,7 @@
   <div class="categories-box">
     <div class="title-more">
       <h3>分类作品库</h3>
-      <span>查看全部</span>
+      <span><router-link to="/cate/全部/0">查看全部</router-link></span>
     </div>
     <div class="categories-item">
       <router-link v-for="item in discoverDataStore.categories" class="categories" :to="'/cate/' + item.category_name + '/'  + item.id">

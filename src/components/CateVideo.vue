@@ -163,6 +163,9 @@ const showPageData = () => {
     case '全球案例':
       videoDataStore.getVmovierList()
       break;
+    case '全部':
+      videoDataStore.getCateArticles(id.value,true)
+      break;
     default:
       // 其他:discover页面(根据id)
       videoDataStore.getCateArticles(id.value)
@@ -193,6 +196,9 @@ watch(tagActive, (newVal) => {
       break;
     case '分类精选':
       videoDataStore.getCateSelectionByIdList(currentTagId)
+      break;
+    case '全部':
+      videoDataStore.getCateArticles(currentTagId,true)
       break;
     default:
       videoDataStore.getCateArticles(currentTagId)
