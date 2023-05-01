@@ -18,7 +18,6 @@ export const useVideoArticleStore = defineStore('videoArticle', {
     // 视频详情
     async getVideoArticeList(id: number) {
       const {data} = await getVideoArtice(id)
-      console.log(data);
       this.videoArticle = data.data
     },
 
@@ -31,7 +30,6 @@ export const useVideoArticleStore = defineStore('videoArticle', {
     // 视频评论
     async getCommentsList(id: number) {
       const {data} = await getComments(id)
-      console.log(data); 
       this.commentsList = data.data.list
       this.loadMoreUrl = data.data.next_page_url
     },

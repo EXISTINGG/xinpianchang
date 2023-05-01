@@ -61,6 +61,8 @@ const onLoad = () => videoArticleStore.getMoreList(false)
 
 const onRefresh = () => videoArticleStore.getMoreList(true)
 
+videoArticleStore.commentsList = []
+
 onMounted(() => {
   videoArticleStore.getCommentsList(id.value)
 })

@@ -1,7 +1,7 @@
 <template>
   <!-- 视频 -->
   <div class="video-box">
-    <video controls autoplay mtt-playsinline="true" ref="videoRef" @loadedmetadata="getVideo">
+    <video controls autoplay mtt-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true" x-webkit-airplay="true" webkit-playsinline="true" playsinline="true" ref="videoRef" @loadedmetadata="getVideo">
       <source v-for="item in videoArticleStore.videoArticle.video.content.progressive" :key="item.id" :src="item.url" type="video/mp4" v-if="videoArticleStore.videoArticle.length != 0"/>
       <!-- <source src="video.webm" type="video/webm" />
       <source src="video.ogv" type="video/ogg" /> -->
@@ -34,6 +34,8 @@ const commentNum = ref(0)
 const videoArticleStore = useVideoArticleStore()
 
 const getVideo = () => {
+  console.log(videoRef);
+  
   videoHeight.value = videoRef.value.offsetHeight
   tabHeight.value = videoHeight.value
 }
@@ -43,6 +45,8 @@ getVideo()
 commentNum.value = videoArticleStore.commentsList.length
 })
 onUpdated(() => {
+  console.log('onplay: ',videoRef.value.onplay);
+  
 getVideo()
 commentNum.value = videoArticleStore.commentsList.length
 })
