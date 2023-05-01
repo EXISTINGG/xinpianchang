@@ -126,7 +126,7 @@ html {
     background: #fff;
 
     .title-more {
-      margin: 5px 0;
+      margin: 10px 0;
       display: flex;
       justify-content: space-between;
     }
