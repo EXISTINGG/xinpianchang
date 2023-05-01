@@ -3,7 +3,8 @@
 <!-- 分类选项 -->
 <section class="hot-function">
   <div v-for="item in videoDataStore.hotFunction" :key="item.model.title">
-      <router-link :to="'/cate/' + item.model.title">
+  <!-- 照顾discover页面需要id -->
+      <router-link :to="'/cate/' + item.model.title + '/' + 'none'">
         <div class="function">
           <img :src="item.model.icon" class="icon"/>
           <span class="title">{{item.model.title}}</span>

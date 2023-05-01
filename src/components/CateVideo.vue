@@ -8,6 +8,7 @@
     :animated="true"
     :safe-area-inset-top="true"	
     @click-left="onClickLeft"
+    z-index="999"
     class="page-title"
   />
   <div class="cate-box" :class="title == '全球案例' ? 'vmovier-cate-box-background' : ''">
@@ -26,13 +27,12 @@
             <div class="video-card" v-if="i === tagActive">
               <VideoCard v-for="items in videoDataStore.videoData.cateVideo" :key="items.id" :video="items"/>
             </div>
-            
           </van-list>
         </van-pull-refresh>
       </van-tab>
 
-      <!-- 右侧搜索 -->
-      <template #nav-right>
+      <!-- 右侧更多 -->
+      <template #nav-right v-if="videoDataStore.categories.length != 0">
         <!-- 占位标签 -->
         <i class="placeholder"></i>
         <div class="right-icon" @click="showPopup">
@@ -43,7 +43,7 @@
     </van-tabs>
 
     <!-- 顶部弹出 (全球案例页面用不到tag)-->
-    <van-popup v-model:show="showTop" closeable  position="top" :style="{ height: '50%' }" v-if="title != '全球案例' && title != '周榜单'">
+    <van-popup v-model:show="showTop" closeable  position="top" :style="{ height: '50%' }" v-if="title != '全球案例' && title != '周榜单' && videoDataStore.categories.length != 0">
       <div class="tag-box">
         <div class="box-top">
           <span class="text">筛选</span>
@@ -94,6 +94,9 @@ const showTop = ref(false);
 const tagActive = ref(0)
 // 当前页面标题
 const title = ref(router.currentRoute.value.params.title)
+// discover用到id
+const id = ref(router.currentRoute.value.params.id)
+
 // 返回上一页
 const onClickLeft = () => history.back()
 // 展示弹出层
@@ -113,6 +116,8 @@ const onRefresh = () => {
       videoDataStore.getVmovierMoreList(true)
       break;
     default:
+      // 其他:discover页面
+      videoDataStore.getCateMoreList(true)
       break;
   }
 }
@@ -133,12 +138,12 @@ const onLoad = () => {
       videoDataStore.getVmovierMoreList(false)
       break;
     default:
+      // 其他:discover页面
+      videoDataStore.getCateMoreList(false)
       break;
   }
 }
-// setInterval(() => {
-//   console.log('LOAD: ',videoDataStore.refreshing,videoDataStore.finished,videoDataStore.loading);
-// }, 1000)
+
 // 点击弹出层的tag,改变当前tag，并关闭弹出层
 const changeTag = (i: number) =>  {
   tagActive.value = i
@@ -159,6 +164,8 @@ const showPageData = () => {
       videoDataStore.getVmovierList()
       break;
     default:
+      // 其他:discover页面(根据id)
+      videoDataStore.getCateArticles(id.value)
       break;
   }
 }
@@ -166,7 +173,6 @@ const showPageData = () => {
 onMounted(() => {
   // 根据不同的页面展示不同的数据
   showPageData()
-  console.log(router.currentRoute.value.params.title)
 })
 
 watch(tagActive, (newVal) => {
@@ -189,6 +195,7 @@ watch(tagActive, (newVal) => {
       videoDataStore.getCateSelectionByIdList(currentTagId)
       break;
     default:
+      videoDataStore.getCateArticles(currentTagId)
       break;
   }
   videoDataStore.finished = false

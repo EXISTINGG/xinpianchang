@@ -52,6 +52,7 @@ const {getVideoDuration,getVideoCount,strLength} = useVideoCount()
       @extend .video-poster;
       height: 85px;
       border: .5px solid #ccc;
+      object-fit: cover;
     }
 
     .video-duration {
@@ -95,6 +96,7 @@ const {getVideoDuration,getVideoCount,strLength} = useVideoCount()
 
         img {
           @extend .avator;
+          object-fit: cover;
         }
 
         .author-v {

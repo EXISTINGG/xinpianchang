@@ -160,6 +160,7 @@ const {getVideoDuration, getVideoCount, strLength} = useVideoCount()
       }
 
       .author-right {
+        display: flex;
         .attention {
           margin-right: 20px;
           color: $color-primary;

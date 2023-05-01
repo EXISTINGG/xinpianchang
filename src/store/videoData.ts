@@ -3,6 +3,7 @@ import { defineStore, createPinia } from 'pinia'
 // 导入持久化插件
 // import piniaPluginPersist from 'pinia-plugin-persist'
 import {getSelect, getloadMore, getMust, getCommend,getCateRecommend, getHot,getCateHot,getCateListById,getCateSelection,getCateSelectionById,getVmovier,getCateHotMore,getCateSelectionMore} from '@/api/home'
+import {getCateArticles,getDiscoveryMore} from '@/api/discover'
 import { showToast } from 'vant';
 // 创建pinia实例
 const pinia = createPinia()
@@ -58,26 +59,19 @@ export const useVideoDataStore = defineStore('videoData', {
       this.videoData.selectVideo = data.data.children.filter((item: any) => item.type != 'mTitle')
       this.videoCardTitle = data.data.children[0].model.title
       this.changeCurrenBanLoad(data, false, true)
-      // this.loadMoreUrl = data.data.loadMoreURL
       console.log('this.videoData.selectVideo', this.videoData.selectVideo);  
     },
     // 必看视频
     async getMustList () {
       const {data} = await getMust()
       this.videoData.mustVideo = data.data.children
-      this.changeCurrenBanLoad(data, false, true)
-      // this.loadMoreUrl = data.data.loadMoreURL
-      // console.log(this.videoData.mustVideo);  
+      this.changeCurrenBanLoad(data, false, true) 
     },
     // 推荐视频
     async getCommendList () {
       const {data} = await getCommend()
       this.videoData.commendVideo = data.data.children.filter((item: any) => item.type != 'uiBanner')
       this.changeCurrenBanLoad(data, true, true)
-      // this.videoData.commendVideo = data.data.children.filter((item: any) => item.type === 'uiMiddleCard')
-      // this.banner = data.data.children.filter((item: any) => item.type === 'uiBanner')[0].children
-      // this.loadMoreUrl = data.data.loadMoreURL
-      // console.log(this.videoData.commendVideo);
     },
 
     // 推荐视频分类
@@ -100,14 +94,7 @@ export const useVideoDataStore = defineStore('videoData', {
             执行视频列表函数,如果有数据,将当前finish变成false
             否则会判断当前页面数据加载完毕 */  
         this.finished = false
-        // console.log('zz',this.finished);
-      }  
-      // console.log('CLEAR ALL DATA COMPLETE');
-      // this.videoData.CateRecommendVideo = data.data.children.filter((item: any) => item.type != 'uiBanner')
-      // this.changeCurrenBanLoad(data, true, true)
-      // this.banner = data.data.children.filter((item: any) => item.type === 'uiBanner')[0].children
-      // this.loadMoreUrl = data.data.loadMoreURL
-      // console.log('getCateRecommendList:',data);   
+      }     
     },
 
     // 热门视频
@@ -154,8 +141,15 @@ export const useVideoDataStore = defineStore('videoData', {
       this.changeCurrenBanLoad(data,false,true)
     },
 
+    // discover页面分类
+    async getCateArticles(id: string) {
+      const {data} = await getCateArticles(id)
+      console.log(data);
+      this.changeCateVideo(data, true, id)
+    },
+
     // 加载更多-分类
-    async getCateMoreList(onRefresh: boolean, title: string) {
+    async getCateMoreList(onRefresh: boolean, title?: string) {
       if(this.loadMoreUrlIsNull()) return
       switch (title) {
         // 分类热门
@@ -171,12 +165,15 @@ export const useVideoDataStore = defineStore('videoData', {
           this.pushCateHotData(selectionMoreData, onRefresh)
           break;
         default:
+          // 其他:discover页面
+          const {data: discoveryMore} = await getDiscoveryMore(this.loadMoreUrl)
+          this.pushCateHotData(discoveryMore, onRefresh)
           break;
       }       
     },
 
     // 加载更多-分类(将数据加入数组)
-    pushCateHotData(data: any, onRefresh: boolean) {
+    pushCateHotData(data: any, onRefresh: boolean) {  
       if (onRefresh) {
         // 上拉刷新(新数据在前,旧数据在后)
         this.videoData.cateVideo.splice(0, 0, ...data.data.list)  
@@ -206,13 +203,28 @@ export const useVideoDataStore = defineStore('videoData', {
     },
 
     // 更改分类视频数据,标签,加载更多url
-    changeCateVideo(data: any) {
+    changeCateVideo(data: any ,isDiscover?: boolean, id?:string) {
       this.videoData.cateVideo = data.data.list
-      // 有标签,手动增加'全部'标签
-      if (data.data?.header?.categories) {
-        this.categories = [{title: '全部', value: -1},...data.data.header.categories]
-      }
-      this.loadMoreUrl = data.data.next_page_url
+      console.log('isDiscover: ',isDiscover); 
+      try {
+          // 是否是discvoer页面的数据
+        if (isDiscover) {
+          if (data.data?.header?.categories.filter((item: any) => item.value == id)[0].sub != null) {
+            this.categories = [{title: '全部', value: -1},...data.data.header.categories.filter((item: any) => item.value == id)[0].sub]
+          } else {
+            // 防止categories为null,不渲染页面
+            this.categories= [{title: '全部', value: -1}]
+          }
+        } else {
+          // 有标签,手动增加'全部'标签      
+          if (data.data?.header?.categories) {
+            this.categories = [{title: '全部', value: -1},...data.data.header.categories]
+          }
+        }
+      } catch {
+        
+      }    
+      this.loadMoreUrl = data.data.next_page_url     
     },
 
     // 更改当前banner,loadMoreurl
@@ -229,8 +241,6 @@ export const useVideoDataStore = defineStore('videoData', {
         this.loadMoreUrl = data.data.loadMoreURL
         console.log('changeUrl: ',this.loadMoreUrl);       
       }
-      // console.log(this.banner);
-      // console.log(this.loadMoreUrl);
     },
 
     // 加载结束

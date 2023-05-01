@@ -12,7 +12,7 @@
         <img :src="props.active ? notesActIcon : notesInactIcon" />
       </template>
     </van-tabbar-item>
-    <van-tabbar-item to="/search">
+    <van-tabbar-item to="/discovery">
       <span>搜索</span>
       <template #icon="props">
         <img :src="props.active ? searchActIcon : searchInactIcon" />
