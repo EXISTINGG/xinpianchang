@@ -42,7 +42,8 @@ const timer = () => setTimeout(() => {
   getVideo()
 }, 500);
 
-onMounted(() => { 
+onMounted(() => {
+videoRef.value.addEventListener('play', () => getVideo())
 timer()
 commentNum.value = videoArticleStore.commentsList.length
 })
