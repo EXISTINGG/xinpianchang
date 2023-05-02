@@ -126,11 +126,12 @@ const id = ref(router.currentRoute.value.params.id)
 
 videoArticleStore.videoArticle = []
 videoArticleStore.similarVidoe = []
+videoArticleStore.commentsList = []
 onMounted(() => {
-  videoArticleStore.getVideoArticeList(id.value)
-  setTimeout(() => {
-    videoArticleStore.getSimilarVidoeList(id.value)
-  }, 500);
+  // videoArticleStore.getVideoArticeList(id.value)
+  // setTimeout(() => {
+  //   videoArticleStore.getSimilarVidoeList(id.value)
+  // }, 500);
 })
 </script>
 

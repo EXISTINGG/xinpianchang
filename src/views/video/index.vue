@@ -23,6 +23,8 @@
 <script setup lang="ts">
 import {ref, onMounted, onUpdated } from 'vue'
 import {useVideoArticleStore} from '@/store/videoArticle.ts'
+import {useRouter} from 'vue-router'
+
 import VideoInfo from './components/VideoInfo.vue'
 import Comments from '@/components/Comments.vue'
 
@@ -32,10 +34,15 @@ const videoHeight = ref(0)
 const tabHeight = ref(0)
 const commentNum = ref(0)
 const videoArticleStore = useVideoArticleStore()
+const router = useRouter()
+
+const id = ref(router.currentRoute.value.params.id)
 
 const getVideo = () => {
-  videoHeight.value = videoRef.value.offsetHeight
-  tabHeight.value = videoHeight.value
+  try {
+    videoHeight.value = videoRef.value.offsetHeight
+    tabHeight.value = videoHeight.value
+  } catch {}
 }
 
 const timer = () => setTimeout(() => {
@@ -43,6 +50,11 @@ const timer = () => setTimeout(() => {
 }, 500);
 
 onMounted(() => {
+    videoArticleStore.getVideoArticeList(id.value)
+    setTimeout(() => {
+      videoArticleStore.getSimilarVidoeList(id.value)
+    }, 200)
+
 videoRef.value.addEventListener('play', () => timer())
 timer()
 commentNum.value = videoArticleStore.commentsList.length

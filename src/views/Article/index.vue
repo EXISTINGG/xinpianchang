@@ -185,7 +185,9 @@ watch(addComment, () => {
 }
 
 .article-box {
+  position: relative;
   padding: 10px;
+  z-index: 1;
   .article-info {
     display: flex;
     padding: 10px;
