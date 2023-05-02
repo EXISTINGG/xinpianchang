@@ -1,6 +1,6 @@
 <template>
   <!-- :key="route.fullPath"防止路由相同,参数不同不刷新 -->
-  <router-view :key="route.fullPath" v-if="/video\/[0-9]*/.test(route.fullPath)"></router-view>
+  <router-view :key="route.fullPath" v-if="/video\/[0-9]*|article\/[a-zA-Z0-9]*/.test(route.fullPath)"></router-view>
   <router-view v-else></router-view>
 
 </template>

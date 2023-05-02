@@ -11,6 +11,7 @@ Vue3+TypeScript(anyScript😁)+VueRouter+Pinia+Axios+Scss+Vant
 4. 热门页面的loadMoreUrl 每次需自行更改
 5. 入场必看页面无loadMoreUrl
 6. 推荐页面的vlog,古风数据为null
+7. 视频文章评论数据都是同一个,无论哪个id
 
 # 部署项目
 由于写成anyScript😁,部署项目注意将`pageage.json`中`scripts`的`build`改为`vite build`

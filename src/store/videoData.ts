@@ -69,9 +69,9 @@ export const useVideoDataStore = defineStore('videoData', {
     },
     // 推荐视频
     async getCommendList () {
-      const {data} = await getCommend()
+      const {data} = await getCommend()      
       this.videoData.commendVideo = data.data.children.filter((item: any) => item.type != 'uiBanner')
-      this.changeCurrenBanLoad(data, true, true)
+      this.changeCurrenBanLoad(data, true, true)    
     },
 
     // 推荐视频分类
@@ -276,18 +276,10 @@ export const useVideoDataStore = defineStore('videoData', {
     },
 
     // 首页-加载更多(onRefresh:是否是刷新, tab:哪个tab页面)
-    async getMore (onRefresh: boolean, tab: string)  {
-      console.log(this.loadMoreUrl,"tab:", tab)
-      console.log('this.loading: ',this.loading);
-      console.log('this.finished: ',this.finished);
-      console.log('this.refreshing: ',this.refreshing);
-      
+    async getMore (onRefresh: boolean, tab: string)  {      
       if(this.loadMoreUrlIsNull()) return console.log('url null');
-      
 
-      console.log('加载更多');
       const {data} = await getloadMore(this.loadMoreUrl, this.currentTab)
-      console.log('loadMore: ',data);
       
       // 上拉刷新(新数据在前,旧数据在后)
       // if (onRefresh) {
@@ -370,10 +362,6 @@ export const useVideoDataStore = defineStore('videoData', {
         // 多少条数据
         let num = data.data.children.filter((item: any) => item.type != 'uiBanner').length
         this.loadEnd(num)
-      console.log('this.loading-ed: ',this.loading);
-      console.log('this.finished-ed: ',this.finished);
-      console.log('this.refreshing-ed: ',this.refreshing);
-
 }   
   },
 

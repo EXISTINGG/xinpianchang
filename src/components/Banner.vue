@@ -1,7 +1,7 @@
 <template>
 <van-swipe :autoplay="3000" :duration="1000" class="swipe-box">
   <van-swipe-item v-for="item in videoDataStore.banner" class="swipe-item">
-    <router-link :to="item.model.link">
+    <router-link :to="'/article/' + /[a-zA-Z0-9]*\?/.exec(/[a-zA-Z0-9]*\?from/.exec(decodeURIComponent(item.model.link)))">
       <img :src="item.model.cover" />
   <!-- banner-title -->
   <span class="banner-title">{{item.model.title}}</span>

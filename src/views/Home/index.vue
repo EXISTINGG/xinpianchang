@@ -34,7 +34,7 @@
         <!-- 占位标签 -->
         <i class="placeholder"></i>
         <div class="right-img">
-          <img :src="searchIcon" />
+          <router-link to="/search"><img :src="searchIcon" /></router-link>
           <img :src="settingIcon" />
         </div>
       </template>
@@ -79,8 +79,7 @@ const getTabMenu = async () => {
   if (res.status === 0) {
     tabMenuList.value = res.data.tab
     tabMenuLists = res.data.tab
-    console.log(res.data.tab);
-    
+   
     // tabActive默认为推荐页面
     tabActive.value = res.data.tab.findIndex(
       (item) => item.alias === 'recommend'

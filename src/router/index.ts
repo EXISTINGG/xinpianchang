@@ -33,6 +33,8 @@ const routes: Array<RouteRecordRaw> = [
 	{path: '/video/:id', name: 'video', component: () => import('@/views/video/index.vue')},
 	// 搜索页面
 	{path: '/search', name: 'search', component: () => import('@/views/Search/index.vue')},
+	// 文章页面
+	{path: '/article/:id',name: 'article', component: () => import('@/views/Article/index.vue')},
 	// 404
 	{ path: '/404', component: () => import('@/views/NotFound.vue') },
 	{ path: '/:pathMatch(.*)', redirect: '/404' }

@@ -1,8 +1,8 @@
-import {request} from '@/utils/request'
+import {request,requests} from '@/utils/request'
 
 export const getVideoArtice = (id: number) => request.get(`/article/${id}`)
 
-export const getSimilarVidoe = (id: number) => request.get(`/article/${id}/next`)
+export const getSimilarVidoe = (id: number) => requests.get(`/article/${id}/next`)
 
 export const getComments = (id: number) => request.get(`https://apis.netstart.cn/xpc/comments?resource_id=${id}`)
 

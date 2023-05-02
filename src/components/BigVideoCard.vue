@@ -146,6 +146,8 @@ const {getVideoDuration, getVideoCount, strLength} = useVideoCount()
         .vip-img {
           background-size: cover;
           background-repeat: no-repeat;
+          display: inline-block;
+
         }
         .vip-size {
           width: 15px;

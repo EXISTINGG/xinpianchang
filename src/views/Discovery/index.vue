@@ -5,11 +5,11 @@
 <div class="discover-box">
   <div class="banner-recommended">
     <van-swipe class="banner" :autoplay="3000" indicator-color="white">
-      <van-swipe-item v-for="item in discoverDataStore.banners" :key="item.id"><img :src="item.cover"/></van-swipe-item>
+      <van-swipe-item v-for="item in discoverDataStore.banners" :key="item.id"><router-link :to="'/article/' +  /[a-zA-Z0-9]*\?/.exec(/[a-zA-Z0-9]*\?utm_source/.exec(decodeURIComponent(item.url)))"><img :src="item.cover"/></router-link></van-swipe-item>
     </van-swipe>
     <div class="recommended">
       <div class="recommended-item" v-for="item in discoverDataStore.recommended_position" :key="item.title">
-        <img :src="item.icon" /> 
+        <img v-lazy="item.icon" /> 
         <span>{{item.title}}</span>
       </div>
     </div>
@@ -21,7 +21,7 @@
     </div>
     <div class="categories-item">
       <router-link v-for="item in discoverDataStore.categories" class="categories" :to="'/cate/' + item.category_name + '/'  + item.id">
-        <img :src="item.cover" /> 
+        <img v-lazy="item.cover" /> 
         <span>{{item.category_name}}</span>
       </router-link>
     </div>

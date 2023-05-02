@@ -17,14 +17,22 @@ export const useVideoArticleStore = defineStore('videoArticle', {
   actions: {
     // 视频详情
     async getVideoArticeList(id: number) {
-      const {data} = await getVideoArtice(id)
-      this.videoArticle = data.data
+      try {
+        const {data} = await getVideoArtice(id)
+        this.videoArticle = data.data
+      } catch (error) {
+        
+      }
     },
 
     // 相识视频
     async getSimilarVidoeList(id: number) {
+     try {
       const {data} = await getSimilarVidoe(id)
       this.similarVidoe = data.data.list
+     } catch (error) {
+       
+     }
     },
 
     // 视频评论
@@ -41,7 +49,8 @@ export const useVideoArticleStore = defineStore('videoArticle', {
         this.finished = false 
         return this.loading = false
       }
-      const {data} = await getMore(this.loadMoreUrl)
+      try {
+        const {data} = await getMore(this.loadMoreUrl)
       console.log(data);
       if(onRefresh) {
         this.commentsList.splice(0, 0, ...data.data.list)
@@ -61,6 +70,9 @@ export const useVideoArticleStore = defineStore('videoArticle', {
           this.loadMoreUrl = ''
           this.refreshing = true
         }
+      } catch (error) {
+        
+      }
     }
   }
 })
