@@ -46,7 +46,7 @@ export const useVideoArticleStore = defineStore('videoArticle', {
     async getMoreList(onRefresh: boolean) {
       if(this.loadMoreUrl == '') {
         this.refreshing = false   
-        this.finished = false 
+        this.finished = true 
         return this.loading = false
       }
       try {
