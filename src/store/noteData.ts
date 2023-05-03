@@ -34,6 +34,8 @@ export const useNoteDataStore = defineStore('noteData', {
         this.refreshing = false
         this.loading = false
         this.finished = false
+
+        
       } catch (error) {
       }
     },

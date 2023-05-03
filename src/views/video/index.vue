@@ -14,7 +14,7 @@
       <VideoInfo />
     </van-tab>
     <van-tab title="评论" :style="{marginTop: tabHeight + 'px'}">
-      <template #title>评论 <span class="comment-num">{{commentNum}}</span></template>
+      <template #title>评论 <span class="comment-num">{{videoArticleStore.countCommentNum}}</span></template>
       <Comments />
     </van-tab>
   </van-tabs>
@@ -32,7 +32,6 @@ const active = ref(0)
 const videoRef = ref(null)
 const videoHeight = ref(0)
 const tabHeight = ref(0)
-const commentNum = ref(0)
 const videoArticleStore = useVideoArticleStore()
 const router = useRouter()
 
@@ -57,13 +56,9 @@ onMounted(() => {
 
 videoRef.value.addEventListener('play', () => timer())
 timer()
-commentNum.value = videoArticleStore.commentsList.length
 })
 
-onUpdated(() => {
-timer()
-commentNum.value = videoArticleStore.commentsList.length
-})
+onUpdated(() => timer())
 </script>
 
 <style lang="scss" scoped>

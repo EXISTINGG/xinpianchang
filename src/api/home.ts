@@ -1,4 +1,5 @@
 import {request} from '@/utils/request'
+import countdown from '@/utils/test'
 
 export const getTab = () => request.get(`/home/config`)
 
@@ -7,13 +8,26 @@ export const getSelect = () => request.get(`/home/selection`)
 
 // 加载更多(首页,全球案例)
 let page = 1
+let num = 1 // 只需获取一次今日日期
+let date: string // 每日精选日期
 export const getloadMore = (url: string, tab?: string) => {
+  console.log(tab);
+  
   // 推荐页返回的moreUrl中,page=2没有加,这里手动增加
   if (tab === 'recommend') {
     page += 1    
     return request.get(url.replace(/\?page=[0-9]*&/,`?page=${page}&`))
+  } else if (tab === 'selection') {
+    if (num == 1) {
+      date = url.slice(-8)
+      num = 0
+    } else {
+      date = countdown(date)
+    }
+    return request.get(url.replace(/[0-9]{8}/,`${date}`))
+  } else {
+    return request.get(url)
   }
-  return request.get(url)
 }
 
 export const getMust = () => request.get(`/home/mustSee`)

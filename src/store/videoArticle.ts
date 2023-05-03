@@ -14,6 +14,12 @@ export const useVideoArticleStore = defineStore('videoArticle', {
     }
   },
 
+  getters: {
+    countCommentNum(state) {
+      return state.commentsList.length
+    }
+  },
+
   actions: {
     // 视频详情
     async getVideoArticeList(id: number) {
@@ -40,14 +46,13 @@ export const useVideoArticleStore = defineStore('videoArticle', {
       const {data} = await getComments(id)
       this.commentsList = data.data.list
       this.loadMoreUrl = data.data.next_page_url
-
     },
 
     // 加载更多
-    async getMoreList(onRefresh: boolean) {  
+    async getMoreList(onRefresh: boolean) {       
       if(this.loadMoreUrl == null || this.loadMoreUrl == '') {
         this.refreshing = false   
-        this.finished = true 
+        // this.finished = true 
         return this.loading = false
       }
       try {
@@ -64,9 +69,10 @@ export const useVideoArticleStore = defineStore('videoArticle', {
 
       this.loadMoreUrl = data.data.next_page_url      
 
-        if (data.data.next_page_url == null) {
+        // 这个数据为null或空
+        if (data.data.next_page_url == null || data.data.next_page_url == '') {
           this.loadMoreUrl = ''
-          this.refreshing = true
+          this.finished = true 
         }
       } catch (error) {
         

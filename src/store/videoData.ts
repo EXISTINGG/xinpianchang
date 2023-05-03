@@ -56,6 +56,8 @@ export const useVideoDataStore = defineStore('videoData', {
     // 每日精选视频
     async getSelectList () {
       const {data} = await getSelect()
+      console.log(data);
+      
       this.videoData.selectVideo = data.data.children.filter((item: any) => item.type != 'mTitle')
       this.videoCardTitle = data.data.children[0].model.title
       this.changeCurrenBanLoad(data, false, true)
@@ -246,7 +248,7 @@ export const useVideoDataStore = defineStore('videoData', {
 
     // 检查loadMoreUrl
     loadMoreUrlIsNull() {
-      if (this.loadMoreUrl === '') {
+      if (this.loadMoreUrl === '' || this.loadMoreUrl === null || this.loadMoreUrl === 'null') {
           this.refreshing = false
           this.loading = false
           this.finished = true

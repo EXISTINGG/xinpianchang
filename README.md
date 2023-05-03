@@ -7,7 +7,7 @@ Vue3+TypeScript(anyScript😁)+VueRouter+Pinia+Axios+Scss+Vant
 # 项目说明
 1. 添加分类的loadMoreUrl,自动增加page数,无需更改
 2. 推荐页面的loadMoreUrl 每次需自行更改(已更改)
-3. 每日精选页面的loadMoreUrl 每次需自行更改(需更改日期)
+3. 每日精选页面的loadMoreUrl 每次需自行更改(需更改日期，已更改，但数据都是当日的)
 4. 热门页面的loadMoreUrl 每次需自行更改
 5. 入场必看页面无loadMoreUrl
 6. 推荐页面的vlog,古风数据为null
