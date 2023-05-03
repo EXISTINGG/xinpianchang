@@ -5,8 +5,6 @@
 </template>
 
 <script setup lang="ts">
-// import {onBeforeMount} from 'vue'
-console.log('MustSee');
 import {onMounted} from 'vue'
 import BigVideoCard from '@/components/BigVideoCard.vue'
 import {useVideoDataStore} from '@/store/videoData.ts'

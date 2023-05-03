@@ -10,7 +10,7 @@ export const useVideoArticleStore = defineStore('videoArticle', {
       loadMoreUrl: '',
       refreshing: false,
       finished: false,
-      loading: true,
+      loading: false,
     }
   },
 
@@ -51,13 +51,10 @@ export const useVideoArticleStore = defineStore('videoArticle', {
       }
       try {
         const {data} = await getMore(this.loadMoreUrl)
-      console.log(data);
       if(onRefresh) {
         this.commentsList.splice(0, 0, ...data.data.list)
-        // this.commentsList = data.data.list
       } else {
         this.commentsList.splice(this.commentsList.length, 0, ...data.data.list)
-        // this.commentsList = data.data.list
       }
       
       this.refreshing = false   

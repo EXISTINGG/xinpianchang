@@ -9,7 +9,7 @@ export const useNoteDataStore = defineStore('noteData', {
       noteComment: [] as any,
       loadMoreUrl: '',
       refreshing: false,
-      loading: true,
+      loading: false,
       finished: false,
     }
   },

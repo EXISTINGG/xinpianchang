@@ -39,16 +39,6 @@ import searchInactiveIcon from '@/assets/icon/search-inactive.png'
 import myActiveIcon from '@/assets/icon/my-active.png'
 import myInactiveIcon from '@/assets/icon/my-inactive.png'
 
-// tabbar图标
-// const homeActIcon = homeActiveIcon
-// const homeInactIcon = homeInactiveIcon
-// const notesActIcon = notesActiveIcon
-// const notesInactIcon = notesInactiveIcon
-// const searchActIcon = searchActiveIcon
-// const searchInactIcon = searchInactiveIcon
-// const myActIcon = myActiveIcon
-// const myInactIcon = myInactiveIcon
-
 // 当前的标签(默认0)
 const tabbarActive = ref(0)
 </script>

@@ -1,10 +1,7 @@
 import axios from 'axios'
 import { showLoadingToast,showFailToast } from 'vant';
-// import { useVideoDataStore } from '@/store/videoData';
 import {closeToast} from 'vant'
 import 'vant/es/toast/style';
-
-// const videoDataStore = useVideoDataStore()
 
 // (有Loading效果)
 export const request = axios.create({
@@ -45,8 +42,6 @@ request.interceptors.response.use(response => {
     message: err.message,
     forbidClick: true,
   })
-  // 关闭加载(超时后,关闭下拉加载)
-  // videoDataStore.refreshing = false
   return Promise.reject(err)
 })
 

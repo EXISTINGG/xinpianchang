@@ -122,9 +122,7 @@ const onRefresh = () => {
   }
 }
 
-const onLoad = () => {
-  console.log('onLoad');
-  
+const onLoad = () => {  
   switch (title.value) {
     case '周榜单':
       break;
@@ -186,7 +184,6 @@ watch(tagActive, (newVal) => {
   }
   // 对应的title的id(value)
   let currentTagId = videoDataStore.categories.filter((item, i) => i === newVal).map(item => item.value)[0]
-  console.log('currentTagId: ',currentTagId);
   // 根据id请求数据
   switch(title.value) {
     case '全球案例' || '周榜单':

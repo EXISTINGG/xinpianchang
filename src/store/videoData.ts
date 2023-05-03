@@ -59,7 +59,6 @@ export const useVideoDataStore = defineStore('videoData', {
       this.videoData.selectVideo = data.data.children.filter((item: any) => item.type != 'mTitle')
       this.videoCardTitle = data.data.children[0].model.title
       this.changeCurrenBanLoad(data, false, true)
-      console.log('this.videoData.selectVideo', this.videoData.selectVideo);  
     },
     // 必看视频
     async getMustList () {
@@ -83,8 +82,6 @@ export const useVideoDataStore = defineStore('videoData', {
       this.loading = false
       this.finished = false
       const {data} = await getCateRecommend(recommendLink)
-      console.log('getCateRecommendList:',data); 
-      console.log('有数据',data.data !== null);       
       if (data.data !== null) {
         this.videoData.CateRecommendVideo = data.data.children.filter((item: any) => item.type != 'uiBanner')
         this.changeCurrenBanLoad(data, true, true)
@@ -100,7 +97,6 @@ export const useVideoDataStore = defineStore('videoData', {
     // 热门视频
     async getHotList() {
       const {data} = await getHot()
-      console.log(data);
       this.videoData.hotVideo = data.data.children.filter((item: any) => item.type != 'uiBanner' && item.type != 'uiFunction')
       this.hotFunction = data.data.children.filter((item: any) => item.type == 'uiFunction')[0].children
       this.changeCurrenBanLoad(data, true, true)
@@ -109,34 +105,28 @@ export const useVideoDataStore = defineStore('videoData', {
     // 热门-分类热门(数据带有标签)
     async getCateHotList() {
       const {data} = await getCateHot()
-      console.log('初始化',data)
       this.changeCateVideo(data)     
     },
     // 热门分类(根据标签id分类)
     async getCateListByIdList(id: string) {
       const {data} = await getCateListById(id)
-      console.log('byIdData: ',data);
       this.changeCateVideo(data)
-      // this.videoData.cateVideo = data.data.list
     },
 
     // 热门-分类精选(数据带有标签)
     async getCateSelectionList() {
       const {data} = await getCateSelection()
-      console.log(data);
       this.changeCateVideo(data)
     },
     // 分类精选(根据标签id分类)
     async getCateSelectionByIdList(id: string) {
       const {data} = await getCateSelectionById(id)
       this.changeCateVideo(data)
-      // this.videoData.cateVideo = data.data.list
     },
 
     // 全球案例
     async getVmovierList() {
       const {data} = await getVmovier()
-      console.log(data);
       this.videoData.vmovierVideo = data.data.children
       this.changeCurrenBanLoad(data,false,true)
     },
@@ -144,7 +134,6 @@ export const useVideoDataStore = defineStore('videoData', {
     // discover页面分类
     async getCateArticles(id: string, isAll?: boolean) {
       const {data} = await getCateArticles(id)
-      console.log(data);
       if (isAll) {
         // 全部
         this.changeCateVideo(data, false, id)
@@ -160,13 +149,11 @@ export const useVideoDataStore = defineStore('videoData', {
         // 分类热门
         case '分类热门':
           const {data: hotMoreData} = await getCateHotMore(this.loadMoreUrl)
-          console.log(hotMoreData); 
           this.pushCateHotData(hotMoreData, onRefresh)   
           break;
         // 分类精选
         case '分类精选':
           const {data: selectionMoreData} =  await getCateSelectionMore(this.loadMoreUrl)
-          console.log('分类精选: ',selectionMoreData);
           this.pushCateHotData(selectionMoreData, onRefresh)
           break;
         default:
@@ -196,7 +183,6 @@ export const useVideoDataStore = defineStore('videoData', {
     async getVmovierMoreList(onRefresh: boolean) {
       if(this.loadMoreUrlIsNull()) return
       const {data} = await getloadMore(this.loadMoreUrl)
-      console.log(data);
       if (onRefresh) {
         this.videoData.vmovierVideo.splice(0,0,...data.data.children)
       } else {
@@ -210,7 +196,6 @@ export const useVideoDataStore = defineStore('videoData', {
     // 更改分类视频数据,标签,加载更多url
     changeCateVideo(data: any ,isDiscover?: boolean, id?:string) {
       this.videoData.cateVideo = data.data.list
-      console.log('isDiscover: ',isDiscover); 
       try {
           // 是否是discvoer页面的数据
         if (isDiscover) {
@@ -235,7 +220,6 @@ export const useVideoDataStore = defineStore('videoData', {
     // 更改当前banner,loadMoreurl
     changeCurrenBanLoad(data: any, isBanner: boolean, isLoadUrl:boolean) {
       if(isBanner) {
-        // console.log(data.data.children.some((item: any) => item.type === 'uiBanner'));
         if (data.data.children.some((item: any) => item.type === 'uiBanner')) {
           this.banner = data.data.children.filter((item: any) => item.type === 'uiBanner')[0].children
         } else {          
@@ -244,13 +228,11 @@ export const useVideoDataStore = defineStore('videoData', {
       }
       if (isLoadUrl) {
         this.loadMoreUrl = data.data.loadMoreURL
-        console.log('changeUrl: ',this.loadMoreUrl);       
       }
     },
 
     // 加载结束
     loadEnd(num: string) {
-      console.log('loagEndFunction start');
       
         this.refreshing = false   
         this.finished = false //只有data为null,才完成        
@@ -260,7 +242,6 @@ export const useVideoDataStore = defineStore('videoData', {
           message: `为你更新${num}条数据`,
           position: 'top',
         });
-        console.log('loadEnd: ',this.refreshing,this.finished,this.loading);
     },
 
     // 检查loadMoreUrl
@@ -277,7 +258,7 @@ export const useVideoDataStore = defineStore('videoData', {
 
     // 首页-加载更多(onRefresh:是否是刷新, tab:哪个tab页面)
     async getMore (onRefresh: boolean, tab: string)  {      
-      if(this.loadMoreUrlIsNull()) return console.log('url null');
+      if(this.loadMoreUrlIsNull()) return
 
       const {data} = await getloadMore(this.loadMoreUrl, this.currentTab)
       
@@ -285,10 +266,6 @@ export const useVideoDataStore = defineStore('videoData', {
       // if (onRefresh) {
         switch (tab) {
           case 'selection':
-            console.log('is selection on');          
-            // this.videoData.selectVideo = [data.data.children.filter((item: any) => item.type != 'mTitle'),...this.videoData.selectVideo]
-
-            // this.videoData.selectVideo = data.data.children.filter((item: any) => item.type != 'mTitle')
             if (onRefresh) {
               // 上拉刷新(新数据在前,旧数据在后)
               this.videoData.selectVideo.splice(0, 0, ...data.data.children.filter((item: any) => item.type != 'mTitle'))
@@ -297,15 +274,8 @@ export const useVideoDataStore = defineStore('videoData', {
               this.videoData.selectVideo.splice(this.videoData.selectVideo.length, 0, ...data.data.children.filter((item: any) => item.type != 'mTitle'))
             }
             this.changeCurrenBanLoad(data, false, true)
-            // this.videoData.selectVideo.splice(0, 0, ...data.data.children.filter((item: any) => item.type != 'mTitle'))
-            // console.log(this.videoData.selectVideo);
             break;
           case 'recommend':
-            console.log('is recommend on');          
-            // this.videoData.commendVideo = data.data.children.filter((item: any, i: number) => i != 0)
-            // this.videoData.commendVideo = [data.data.children.filter((item: any) => item.type != 'uiBanner'), ...this.videoData.commendVideo]
-
-            // this.videoData.commendVideo = data.data.children.filter((item: any) => item.type != 'uiBanner')
             if (onRefresh) {
               // 上拉刷新(新数据在前,旧数据在后)
               this.videoData.commendVideo.splice(0, 0, ...data.data.children.filter((item: any) => item.type != 'uiBanner'))
@@ -314,10 +284,8 @@ export const useVideoDataStore = defineStore('videoData', {
               this.videoData.commendVideo.splice(this.videoData.commendVideo.length, 0, ...data.data.children.filter((item: any) => item.type != 'uiBanner'))
             }
             this.changeCurrenBanLoad(data, true, true)
-      // this.videoData.commendVideo = data.data.children.filter((item: any) => item.type === 'uiMiddleCard')
             break;
           case 'hot':
-            console.log('is hot on');
             if (onRefresh) {
               // 上拉刷新(新数据在前,旧数据在后)
               this.videoData.hotVideo.splice(0, 0, ...data.data.children.filter((item: any) => item.type != 'uiBanner' && item.type != 'uiFunction'))
@@ -328,10 +296,8 @@ export const useVideoDataStore = defineStore('videoData', {
             this.changeCurrenBanLoad(data, true, true)
             
             break;
-          // case 'plot' || 'creative' || 'photography' || 'travel' || 'backstage' || 'mixCut' || 'equipment' || 'animation' || 'vlog' || 'antiquity' || 'advertise':
-          default:
-            console.log("'plot' || 'creative' || 'photography' || 'travel' || 'backstage' || 'mixCut' || 'equipment' || 'animation' || 'vlog' || 'antiquity' || 'advertise'");
-            console.log('清空所有数据2',data.data == null);       
+            default:
+            // 'plot' || 'creative' || 'photography' || 'travel' || 'backstage' || 'mixCut' || 'equipment' || 'animation' || 'vlog' || 'antiquity' || 'advertise':
             if (data.data == null) {
               this.banner = []
               this.loadMoreUrl = ''
@@ -340,8 +306,6 @@ export const useVideoDataStore = defineStore('videoData', {
               this.refreshing = false
               return
             }  
-            // this.videoData.CateRecommendVideo = [data.data.children.filter((item: any) => item.type != 'uiBanner'),...this.videoData.CateRecommendVideo]
-            // this.videoData.CateRecommendVideo = data.data.children.filter((item: any) => item.type != 'uiBanner')
             // 不影响响应式数据插入新数据
             if (onRefresh) {
               // 上拉刷新(新数据在前,旧数据在后)

@@ -13,7 +13,6 @@ export const useDiscoverDataStore = defineStore('discoverData', {
   actions: {
     async getDiscoveryList() {
       const {data} = await getDiscovery()
-      console.log(data);
       this.banners = data.data.banners
       this.categories = data.data.categories
       this.recommended_position = data.data.recommended_position

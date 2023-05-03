@@ -88,9 +88,7 @@ const props = defineProps({
 })
 const {getVideoCount, strLength,formatTime,getVideoDuration} = useVideoCount()
 
-const getImg = (imgs, i) => { 
-  console.log(imgs, i);
-  
+const getImg = (imgs, i) => {   
   showImagePreview({
     images: imgs,
     loop: false,

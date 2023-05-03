@@ -324,8 +324,6 @@ onMounted(() => {
 
   .comment-list {
     margin-top: 10px;
-    // display: flex;
-    // flex-direction: column;
 
     .comment-box {
       display: flex;

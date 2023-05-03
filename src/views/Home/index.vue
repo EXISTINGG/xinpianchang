@@ -34,8 +34,8 @@
         <!-- 占位标签 -->
         <i class="placeholder"></i>
         <div class="right-img">
-          <router-link to="/search"><img :src="searchIcon" /></router-link>
-          <img :src="settingIcon" />
+          <router-link to="/search"><img :src="searchIconPng" /></router-link>
+          <img :src="settingIconPng" />
         </div>
       </template>
     </van-tabs>
@@ -67,9 +67,7 @@ const currenTab = ref('')
 let tabActive = ref()
 // 路由
 const router = useRouter()
-// 图标
-const searchIcon = searchIconPng
-const settingIcon = settingIconPng
+
 // 视频store
 const videoDataStore = useVideoDataStore()
 
@@ -105,7 +103,6 @@ watch(tabActive, (newVal) => {
     if (i === newVal) return item.alias
   })[newVal]
   videoDataStore.currentTab = currenTab.value
-  console.log(videoDataStore.currentTab ,1111);
   
   // 更具当前的tabActive到对应的路由
   switch (newVal) {

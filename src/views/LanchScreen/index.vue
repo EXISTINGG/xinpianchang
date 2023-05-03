@@ -35,9 +35,7 @@ const router = useRouter()
 
 const checkVersion = async () => {
   const data  = await getVersion()
-  console.log(data)
 }
-// checkVersion() 
 
 // 自动跳转到首页
 const toHomePage = () => {
