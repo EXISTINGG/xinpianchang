@@ -22,7 +22,7 @@ export const useNoteDataStore = defineStore('noteData', {
     },
 
     async getNotesMoreList(onRefresh: boolean) {
-      if (this.loadMoreUrl == '') return
+      // if (this.loadMoreUrl == '') return
       try {
         const {data} = await getNotesMore(this.loadMoreUrl)
         if (onRefresh) {
