@@ -361,6 +361,7 @@ watch(addComment, () => {
 
         .comment-content {
           margin: 20px 0 10px;
+          word-break:break-all;
         }
 
         .time-ip-like {

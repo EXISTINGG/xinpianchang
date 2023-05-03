@@ -40,11 +40,12 @@ export const useVideoArticleStore = defineStore('videoArticle', {
       const {data} = await getComments(id)
       this.commentsList = data.data.list
       this.loadMoreUrl = data.data.next_page_url
+
     },
 
     // 加载更多
-    async getMoreList(onRefresh: boolean) {
-      if(this.loadMoreUrl == '') {
+    async getMoreList(onRefresh: boolean) {  
+      if(this.loadMoreUrl == null || this.loadMoreUrl == '') {
         this.refreshing = false   
         this.finished = true 
         return this.loading = false
@@ -61,7 +62,7 @@ export const useVideoArticleStore = defineStore('videoArticle', {
       this.finished = false 
       this.loading = false
 
-      this.loadMoreUrl = data.data.next_page_url
+      this.loadMoreUrl = data.data.next_page_url      
 
         if (data.data.next_page_url == null) {
           this.loadMoreUrl = ''

@@ -213,7 +213,7 @@ onMounted(() => {})
       }
 
       .content {
-
+            word-break:break-all;
       }
     }
     

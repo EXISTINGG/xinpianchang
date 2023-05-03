@@ -156,6 +156,10 @@ onMounted(() => {
           .reply {
             color: #a1a1a1;
           }
+
+          .content {
+            word-break:break-all;
+          }
         }
 
         

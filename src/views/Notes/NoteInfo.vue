@@ -255,6 +255,10 @@ onMounted(() => {
   .title-content {
     margin-top: 10px;
 
+    .content {
+      word-break:break-all;
+    }
+
     .topics {
       display: block;
       color: blue;
@@ -363,6 +367,10 @@ onMounted(() => {
         .author-name {
           display: flex;
           align-items:center;
+        }
+
+        .content {
+          word-break:break-all;
         }
       }
     }
