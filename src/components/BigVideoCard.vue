@@ -78,8 +78,6 @@ const props = defineProps({
     required: true
   }
 })
-// console.log(111,props.video.resource.author.userinfo.username);
-
 const {getVideoDuration, getVideoCount, strLength} = useVideoCount()
 </script>
 

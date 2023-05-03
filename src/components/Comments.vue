@@ -71,18 +71,13 @@ onMounted(() => {
 <style lang="scss" scoped>
 .comment-list {
   margin-top: 10px;
-  // padding: 0 10px;
 
   .comment-box {
     display: flex;
-    // justify-content: space-between;
-    // align-items: center;
     padding: 10px;
-    // width: 100%;
     border-bottom: .5px solid #ccc;
 
     .comment-left {
-      // display: flex;
 
       .avator {
         position: relative;

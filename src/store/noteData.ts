@@ -1,13 +1,15 @@
 import { defineStore } from 'pinia'
-import { getNotes,getNotesMore } from '@/api/note'
+import { getNotes,getNotesMore,getNoteById,getNoteComment } from '@/api/note'
 
 export const useNoteDataStore = defineStore('noteData', {
   state: () => {
     return {
       notes: [] as any,
+      noteInfo: [] as any,
+      noteComment: [] as any,
       loadMoreUrl: '',
       refreshing: false,
-      loading: false,
+      loading: true,
       finished: false,
     }
   },
@@ -34,6 +36,16 @@ export const useNoteDataStore = defineStore('noteData', {
         this.finished = false
       } catch (error) {
       }
+    },
+
+    async getNoteByIdList(id:  string) {
+      const {data} = await getNoteById(id)
+      this.noteInfo = data.data
+    },
+
+    async getNoteCommentList(id: string) {
+      const {data} = await getNoteComment(id)
+      this.noteComment = data.data
     }
   }
 })

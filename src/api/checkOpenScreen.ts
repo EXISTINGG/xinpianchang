@@ -1,5 +1,3 @@
 import {requests} from '@/utils/request'
 
-export const getVersion = () => {
-  return requests.get(`/version`)
-}
+export const getVersion = () => requests.get(`/version`)

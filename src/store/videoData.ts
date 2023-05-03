@@ -40,7 +40,7 @@ export const useVideoDataStore = defineStore('videoData', {
       // 分类视频标签
       categories: [] as any,
       // 是否在加载(加载更多)
-      loading: false, // 刚进来时不需要刷新页面.改为true
+      loading: true, // 刚进来时不需要刷新页面.改为true
       // 是否在下拉刷新
       refreshing: false, 
       // 是否没有内容了
@@ -74,7 +74,7 @@ export const useVideoDataStore = defineStore('videoData', {
       this.changeCurrenBanLoad(data, true, true)    
     },
 
-    // 推荐视频分类
+    // 推荐视频分类-首页
     async getCateRecommendList(recommendLink: string) {
       this.videoData.CateRecommendVideo = []
       this.banner = []

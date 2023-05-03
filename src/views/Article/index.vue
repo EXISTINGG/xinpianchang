@@ -130,7 +130,7 @@
       </div>
     </div>
   </section>
-  <section v-else>null</section>
+  <section v-else><EmptyPage /></section>
 </template>
 
 <script setup lang="ts">
@@ -139,6 +139,7 @@ import { useRoute } from 'vue-router'
 import { useArticleDataStore } from '@/store/articleData.ts'
 import useVideoCount from '@/hooks/useVideoCount.ts'
 import like from '@/assets/icon/like.png'
+import EmptyPage from '../EmptyPage.vue'
 
 const route = useRoute()
 const id = route.params.id

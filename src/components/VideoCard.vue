@@ -97,6 +97,7 @@ const {getVideoDuration,getVideoCount,strLength} = useVideoCount()
         img {
           @extend .avator;
           object-fit: cover;
+          border: .5px solid #ccc;
         }
 
         .author-v {

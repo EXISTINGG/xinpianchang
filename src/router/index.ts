@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
 	// 关注
 	{ path: '/feed', name: "feed", component: () => import('@/views/Home/tab/Feed.vue'), meta: { isLogin: true } },
 	// 手记页面
-	{ path: '/notes', component: () => import('@/views/Notes/index.vue') },
+	{ path: '/notes',name: 'notes', component: () => import('@/views/Notes/index.vue') },
 	// 发现页面
 	{ path: '/discovery', component: () => import('@/views/Discovery/index.vue') },
 	// 我的页面
@@ -35,6 +35,8 @@ const routes: Array<RouteRecordRaw> = [
 	{path: '/search', name: 'search', component: () => import('@/views/Search/index.vue')},
 	// 文章页面
 	{path: '/article/:id',name: 'article', component: () => import('@/views/Article/index.vue')},
+	// 手记详情页面
+	{path: '/note/:id', name: 'note', component: () => import('@/views/Notes/NoteInfo.vue')},
 	// 404
 	{ path: '/404', component: () => import('@/views/NotFound.vue') },
 	{ path: '/:pathMatch(.*)', redirect: '/404' }

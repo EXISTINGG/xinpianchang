@@ -1,9 +1,9 @@
 <template>
-  <router-link to="/*">
+  <router-link :to="'/note/'+ note.id">
     <section class="note-box">
-    <div class="author-box" @click.prevent="">
+    <div class="author-box">
       <div class="avator-name">
-        <div class="avator">
+        <div class="avator" @click.prevent="">
           <img v-lazy="note.user.avatar">
           <i class="author-v" :class="note.user.author_type === 1 ? 'author-blue-v' : 'author-yellow-v'" v-if="note.user.author_type != 0"></i>
         </div>
@@ -15,7 +15,7 @@
           <span class="time">{{formatTime(note.addtime)}} 发布</span>
         </div>
       </div>
-      <div class="attention-more">
+      <div class="attention-more" @click.prevent="">
         <i class="attention">+ 关注</i>
         <i class="more">:</i>
       </div>
@@ -123,7 +123,6 @@ onMounted(() => {})
 
       .avator {
         position: relative;
-        border: .5px solid #ccc;
         border-radius: 50%;
         width: 40px;
         height: 40px;
@@ -131,6 +130,7 @@ onMounted(() => {})
         img {
           @extend .avator;
           object-fit: cover;
+          border: .5px solid #ccc;
         }
 
         .author-v {

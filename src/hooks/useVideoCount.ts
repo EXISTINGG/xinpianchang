@@ -60,6 +60,8 @@ export default ():VideoCountProps => {
         } else {
           return `${Math.floor(diff / (60 * 60 * 1000))}小时前`;
         }
+      } else if (now.getFullYear() === dt.getFullYear()) {
+        return `${(dt.getMonth() + 1).toString().padStart(2, '0')}-${dt.getDate().toString().padStart(2, '0')}`;
       } else {
         return `${dt.getFullYear()}-${(dt.getMonth() + 1).toString().padStart(2, '0')}-${dt.getDate().toString().padStart(2, '0')}`;
       }

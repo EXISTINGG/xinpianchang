@@ -10,7 +10,7 @@ export const useVideoArticleStore = defineStore('videoArticle', {
       loadMoreUrl: '',
       refreshing: false,
       finished: false,
-      loading: false,
+      loading: true,
     }
   },
 

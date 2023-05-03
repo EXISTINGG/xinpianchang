@@ -3,25 +3,25 @@
     <van-tabbar-item to="/home">
       <span>首页</span>
       <template #icon="props">
-        <img :src="props.active ? homeActIcon : homeInactIcon" />
+        <img :src="props.active ? homeActiveIcon : homeInactiveIcon" />
       </template>
     </van-tabbar-item>
     <van-tabbar-item to="/notes">
       <span>手记</span>
       <template #icon="props">
-        <img :src="props.active ? notesActIcon : notesInactIcon" />
+        <img :src="props.active ? notesActiveIcon : notesInactiveIcon" />
       </template>
     </van-tabbar-item>
     <van-tabbar-item to="/discovery">
       <span>搜索</span>
       <template #icon="props">
-        <img :src="props.active ? searchActIcon : searchInactIcon" />
+        <img :src="props.active ? searchActiveIcon : searchInactiveIcon" />
       </template>
     </van-tabbar-item>
     <van-tabbar-item to="/user">
       <span>我的</span>
       <template #icon="props">
-        <img :src="props.active ? myActIcon : myInactIcon" />
+        <img :src="props.active ? myActiveIcon : myInactiveIcon" />
       </template>
     </van-tabbar-item>   
   </van-tabbar>
@@ -40,14 +40,14 @@ import myActiveIcon from '@/assets/icon/my-active.png'
 import myInactiveIcon from '@/assets/icon/my-inactive.png'
 
 // tabbar图标
-const homeActIcon = homeActiveIcon
-const homeInactIcon = homeInactiveIcon
-const notesActIcon = notesActiveIcon
-const notesInactIcon = notesInactiveIcon
-const searchActIcon = searchActiveIcon
-const searchInactIcon = searchInactiveIcon
-const myActIcon = myActiveIcon
-const myInactIcon = myInactiveIcon
+// const homeActIcon = homeActiveIcon
+// const homeInactIcon = homeInactiveIcon
+// const notesActIcon = notesActiveIcon
+// const notesInactIcon = notesInactiveIcon
+// const searchActIcon = searchActiveIcon
+// const searchInactIcon = searchInactiveIcon
+// const myActIcon = myActiveIcon
+// const myInactIcon = myInactiveIcon
 
 // 当前的标签(默认0)
 const tabbarActive = ref(0)
