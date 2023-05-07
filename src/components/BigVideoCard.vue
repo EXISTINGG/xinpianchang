@@ -66,12 +66,7 @@ import collected from '@/assets/icon/collected.png'
 import comment from '@/assets/icon/comment.png'
 import like from '@/assets/icon/like.png'
 import liked from '@/assets/icon/liked.png'
-// icon
-// const collectIcon = collect
-// const collectedIcon = collected
-// const commentIcon = comment
-// const likeIcon = like
-// const likedIcon = liked
+
 // 接收父组件的数据
 const props = defineProps({
   video: {

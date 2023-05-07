@@ -56,7 +56,7 @@
           </van-dropdown-menu>
         </div>
 
-        <div class="video-list" v-if="userStore.userArticle.length != 0">
+        <div class="video-list" v-if="userStore?.userArticle.length != 0">
           <van-list
           v-model:loading="userStore.articel.loading"
           :finished="userStore.articel.finished"
@@ -74,7 +74,7 @@
         <div class="empty"><van-empty description="页面为空" class="empty"/></div>
       </van-tab>
       <van-tab title="专辑">
-        <div class="video-list-collect" v-if="userStore.userCollect.length != 0">
+        <div class="video-list-collect" v-if="userStore?.userCollect.length != 0">
           <van-list
           v-model:loading="userStore.collect.loading"
           :finished="userStore.collect.finished"
@@ -93,7 +93,7 @@
         <div class="empty" v-else><van-empty description="还没有创建专辑" class="empty"/></div>
       </van-tab>
       <van-tab title="喜欢">
-        <div class="video-list-approved" v-if="userStore.userApproved.length != 0">
+        <div class="video-list-approved" v-if="userStore?.userApproved.length != 0">
           <van-list
           v-model:loading="userStore.approved.loading"
           :finished="userStore.approved.finished"
