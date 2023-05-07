@@ -95,13 +95,17 @@ export const useUserStore = defineStore('user', {
     // 粉丝
     async getUserFollowersList(id: string) {
       const {data} = await getUserFollowers(id) 
-      this.userFollowers = data.data.list
+      // 特殊情况,用户关闭列表,不展示
+      this.userFollowers = data.data?.list || []
+      console.log(this.userFollowers);
+      
       this.follower.loadMoreUrl = data.data.next_page_url
     },
     // 关注
     async getUserFolloweesList(id: string) {
       const {data} = await getUserFollowees(id)
-      this.userFollowers = data.data.list
+      // 特殊情况,用户关闭列表,不展示
+      this.userFollowers = data.data?.list || []
       this.follower.loadMoreUrl = data.data.next_page_url
     },
     // 加载更多,粉丝/关注
