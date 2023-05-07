@@ -23,7 +23,7 @@
     </van-pull-refresh>
   </div>
 
-  <div v-else><van-empty :description="`还没有${route.params.title}`" /></div>
+  <div v-else><van-empty :description="`还没有${route.params.title}或已关闭查看权限`" /></div>
   
 </template>
 
