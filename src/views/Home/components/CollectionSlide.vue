@@ -1,6 +1,6 @@
 <template>
   <van-swipe class="swipe" :width="160" :loop="false" :show-indicators="false" :duration="500">
-          <van-swipe-item class="swipe-item" v-for="item in collection" :key="item.model.resource.id">
+          <van-swipe-item class="swipe-item" v-for="item in collection" :key="item.model.resource.id" @click="goUserInfo(item.model.resource.id)">
             <div class="author-box">
               <div class="avator-v">
                 <img v-lazy="item.model.resource.avatar">
@@ -14,7 +14,7 @@
                 <div>{{item.model.resource.count.count_article}}作品 · {{getVideoCount(item.model.resource.count.count_follower)}} 粉丝</div>
                 <div>{{item.model.resource.occupation}}</div>
               </div>
-              <div class="follow">
+              <div class="follow" @click.stop="">
                   <button>+ 关注</button>
               </div>
             </div>
@@ -23,8 +23,13 @@
 </template>
 
 <script setup lang="ts">
+import {useRouter} from 'vue-router'
 import useVideoCount from '@/hooks/useVideoCount.ts'
+
+const router = useRouter()
+
 const {strLength,getVideoCount} = useVideoCount()
+
 
 // 接收父组件的数据
 const props = defineProps({
@@ -33,6 +38,8 @@ const props = defineProps({
     required: true
   }
 })
+const goUserInfo = (id: string) => router.push(`/userinfo/${id}`)
+
 </script>
 
 <style lang="scss">

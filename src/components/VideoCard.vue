@@ -9,12 +9,12 @@
     <h3 class="title">{{video.title}}</h3>
     <span class="view-like">播放量 {{getVideoCount(video.count.count_view)}} · 喜欢 {{getVideoCount(video.count.count_like)}}</span>
     <div class="author-info">
-      <div class="avator">
+      <div class="avator" @click.prevent="goUserInfo(video.userid)">
         <img v-lazy="video.author.userinfo.avatar">
         <span class="author-v" :class="video.author.userinfo.author_type === 1 ? 'author-blue-v' : 'author-yellow-v'" v-if="video.author.userinfo.author_type != 0"></span>
       </div>
       <!-- name >= 8 -->
-      <text class="name">{{strLength(video.author.userinfo.username) > 16 ? video.author.userinfo.username.substring(0,6) + '···' : video.author.userinfo.username}}</text>
+      <text class="name" @click.prevent="goUserInfo(video.userid)">{{strLength(video.author.userinfo.username) > 16 ? video.author.userinfo.username.substring(0,6) + '···' : video.author.userinfo.username}}</text>
       <span class="vip-icon" :class="video.author.userinfo.vip_status === 1 ? 'vip-size' : 'svip-size'" v-if="video.author.userinfo.vip_status != 0"></span>
     </div>
   </div>
@@ -25,7 +25,9 @@
 
 <script setup lang="ts">
 import useVideoCount from '@/hooks/useVideoCount.ts'
+import {useRouter} from 'vue-router'
 
+const router = useRouter()
 // 接收父组件的数据
 const props = defineProps({
   video: {
@@ -35,6 +37,8 @@ const props = defineProps({
 })
 
 const {getVideoDuration,getVideoCount,strLength} = useVideoCount()
+const goUserInfo = (id: string) => router.push(`/userinfo/${id}`)
+
 </script>
 
 <style lang="scss">

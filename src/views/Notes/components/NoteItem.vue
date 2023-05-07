@@ -2,13 +2,13 @@
   <router-link :to="'/note/'+ note.id">
     <section class="note-box">
     <div class="author-box">
-      <div class="avator-name">
-        <div class="avator" @click.prevent="">
+      <div class="avator-name" @click.prevent="goUserInfo(note.user.id)">
+        <div class="avator">
           <img v-lazy="note.user.avatar">
           <i class="author-v" :class="note.user.author_type === 1 ? 'author-blue-v' : 'author-yellow-v'" v-if="note.user.author_type != 0"></i>
         </div>
         <div class="name-time">
-          <div class="name">
+          <div class="name" @click.prevent="goUserInfo(note.user.id)">
             <text>{{note.user.username}}</text>
             <i class="vip-icon" :class="note.user.vip_status === 1 ? 'vip-size' : 'svip-size'" v-if="note.user.vip_status != 0"></i>
           </div>
@@ -73,12 +73,15 @@
 </template>
 
 <script setup lang="ts">
-import {ref,reactive, onMounted} from 'vue'
+import {ref} from 'vue'
+import {useRouter} from 'vue-router'
 import useVideoCount from '@/hooks/useVideoCount.ts'
 import { showImagePreview } from 'vant'
 import like from '@/assets/icon/like.png'
 import comment from '@/assets/icon/comment.png'
 import share from '@/assets/icon/share.png'
+
+const router = useRouter()
 
 const props = defineProps({
   note: {
@@ -88,6 +91,9 @@ const props = defineProps({
 })
 const {getVideoCount, strLength,formatTime,getVideoDuration} = useVideoCount()
 
+const goUserInfo = (id: string) => router.push(`/userinfo/${id}`)
+
+
 const getImg = (imgs, i) => {   
   showImagePreview({
     images: imgs,
@@ -96,7 +102,6 @@ const getImg = (imgs, i) => {
   });
 }
 
-onMounted(() => {})
 </script>
 
 

@@ -6,7 +6,7 @@ export const getNotes = () => request.get(`/notes`)
 export const getNotesMore = (url: string) => request.get(`${url}`)
 
 // 手记详情内容
-export const getNoteById = (id: string) => request.get(`note/${id}`)
+export const getNoteById = (id: string) => request.get(`/note/${id}`)
 
 // 手记评论
-export const getNoteComment = (id: string) => request.get(`note/${id}/comment`)
+export const getNoteComment = (id: string) => request.get(`/note/${id}/comment`)

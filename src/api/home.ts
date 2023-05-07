@@ -1,5 +1,5 @@
 import {request} from '@/utils/request'
-import countdown from '@/utils/test'
+import countdown from '@/utils/countdown'
 
 export const getTab = () => request.get(`/home/config`)
 
@@ -39,7 +39,7 @@ export const getCommend = () => request.get(`/home/recommend`)
 export const getCateRecommend = (link: string) => request.get(`${link}&page&pageSize=20`)
 
 
-export const getHot = () => request.get(`home/hot`)
+export const getHot = () => request.get(`/home/hot`)
 
 // 热门分类(带有标签)
 export const getCateHot = () => request.get(`/home/cateHot`)

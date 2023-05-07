@@ -48,7 +48,8 @@
       </div>
       <div class="team-item">
         <van-swipe class="swipe" :width="260" :loop="false" :show-indicators="false" :duration="500">
-          <van-swipe-item class="swipe-item">
+        <!-- 作者 -->
+          <van-swipe-item class="swipe-item" @click="goUserInfo(videoArticleStore.videoArticle.author.userinfo.id)">
             <div class="author-box">
               <div class="left-author">
                 <div class="avator-v">
@@ -63,12 +64,13 @@
                   <div class="role">{{videoArticleStore.videoArticle.author.role}}</div>
                 </div>
               </div>
-              <div class="follow">
+              <div class="follow" @click.stop="">
                 <button>关注</button>
               </div>
             </div>
           </van-swipe-item>
-          <van-swipe-item class="swipe-item" v-for="item in videoArticleStore.videoArticle.team" :key="item.userinfo.id">
+          <!-- 团队其他人 -->
+          <van-swipe-item class="swipe-item" v-for="item in videoArticleStore.videoArticle.team" :key="item.userinfo.id" @click="goUserInfo(item.userinfo.id)">
             <div class="author-box">
               <div class="left-author">
                 <div class="avator-v">
@@ -83,7 +85,7 @@
                   <div class="role">{{item.role}}</div>
                 </div>
               </div>
-              <div class="follow">
+              <div class="follow" @click.stop="">
                 <button>关注</button>
               </div>
             </div>
@@ -122,6 +124,7 @@ const route = useRoute()
 const {getVideoCount, strLength,formatTime} = useVideoCount()
 
 const id = ref(router.currentRoute.value.params.id)
+const goUserInfo = (id: string) => router.push(`/userinfo/${id}`)
 
 
 videoArticleStore.videoArticle = []

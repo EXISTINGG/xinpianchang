@@ -37,6 +37,10 @@ const routes: Array<RouteRecordRaw> = [
 	{path: '/article/:id',name: 'article', component: () => import('@/views/Article/index.vue')},
 	// 手记详情页面
 	{path: '/note/:id', name: 'note', component: () => import('@/views/Notes/NoteInfo.vue')},
+	// 用户详情页
+	{path: '/userinfo/:id', name: 'userinfo', component: () => import('@/views/User/userInfo/index.vue')},
+	// 粉丝、关注列表页
+	{path: '/userlist/:id/:title', name: 'userlist', component: () => import('@/views/User/userList/index.vue')},
 	// 404
 	{ path: '/404', component: () => import('@/views/NotFound.vue') },
 	{ path: '/:pathMatch(.*)', redirect: '/404' }

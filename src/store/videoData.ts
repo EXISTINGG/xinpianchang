@@ -72,7 +72,9 @@ export const useVideoDataStore = defineStore('videoData', {
     async getCommendList () {
       const {data} = await getCommend()      
       this.videoData.commendVideo = data.data.children.filter((item: any) => item.type != 'uiBanner')
-      this.changeCurrenBanLoad(data, true, true)    
+      this.changeCurrenBanLoad(data, true, true) 
+      console.log(data.data);
+         
     },
 
     // 推荐视频分类-首页
@@ -131,6 +133,8 @@ export const useVideoDataStore = defineStore('videoData', {
       const {data} = await getVmovier()
       this.videoData.vmovierVideo = data.data.children
       this.changeCurrenBanLoad(data,false,true)
+      console.log(data);
+      
     },
 
     // discover页面分类

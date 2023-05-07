@@ -4,12 +4,12 @@
     <div class="bar-left">
       <i @click="onClickLeft">返回</i>
       <div class="author">
-        <div class="avator">
+        <div class="avator" @click="goUserInfo(noteDataStore.noteInfo.user.id)">
           <img :src="noteDataStore.noteInfo.user.avatar">
           <i class="author-v" :class="noteDataStore.noteInfo.user.author_type === 1 ? 'author-blue-v' : 'author-yellow-v'" v-if="noteDataStore.noteInfo.user.author_type != 0"></i>
         </div>
         <div class="name">
-          <text>{{strLength(noteDataStore.noteInfo.user.username) >= 16 ? noteDataStore.noteInfo.user.username.substring(0,6) + '···' : noteDataStore.noteInfo.user.username}}</text>
+          <text @click="goUserInfo(noteDataStore.noteInfo.user.id)">{{strLength(noteDataStore.noteInfo.user.username) >= 16 ? noteDataStore.noteInfo.user.username.substring(0,6) + '···' : noteDataStore.noteInfo.user.username}}</text>
           <i class="vip-icon" :class="noteDataStore.noteInfo.user.vip_status === 1 ? 'vip-size' : 'svip-size'" v-if="noteDataStore.noteInfo.user.vip_status != 0"></i>
         </div>
       </div>
@@ -62,13 +62,13 @@
     <div v-if="noteDataStore.noteComment.length != 0">
       <div class="comment-box" v-for="item in noteDataStore.noteComment" :key="item.id">
         <i class="like">{{item.likeCount === 0 ? '' : item.likeCount}}<img :src="like"></i>
-        <div class="avator">
+        <div class="avator" @click="goUserInfo(item.userDetail.id)">
           <img v-lazy="item.userDetail.avatar_big">
           <i class="author-v" :class="item.userDetail.badge === 1 ? 'author-blue-v' : 'author-yellow-v'" v-if="item.userDetail.badge != 0"></i>
         </div>
         <div class="author-content">
           <div class="author-name">
-            <text>{{item.userDetail.nickname}}</text>
+            <text @click="goUserInfo(item.userDetail.id)">{{item.userDetail.nickname}}</text>
             <i class="vip-icon" :class="item.userDetail.vip_type === 1 ? 'vip-size' : 'svip-size'" v-if="item.userDetail.vip_type != 0"></i>
           </div>
           <div class="content">{{item.contentText}}</div>
@@ -77,12 +77,12 @@
               <!-- 回复 -->             
               <div class="comment-box reply" v-if="item?.parent">
                 <div class="avator reply-avator">
-                  <img v-lazy="item.parent.userDetail.avatar_big">
+                  <img v-lazy="item.parent.userDetail.avatar_big" @click="goUserInfo(item.parent.userDetail.id)">
                   <i class="author-v" :class="item.parent.userDetail.badge === 1 ? 'author-blue-v' : 'author-yellow-v'" v-if="item.parent.userDetail.badge != 0"></i>
                 </div>
                 <div class="author-content content-noborder">
                   <div class="author-name">
-                    <text>{{item.parent.userDetail.nickname}}</text>
+                    <text @click="goUserInfo(item.parent.userDetail.id)">{{item.parent.userDetail.nickname}}</text>
                     <i class="vip-icon" :class="item.parent.userDetail.vip_type === 1 ? 'vip-size' : 'svip-size'" v-if="item.parent.userDetail.vip_type != 0"></i>
                   </div>
                   <div class="content">{{item.parent.contentText}}</div>
@@ -101,11 +101,11 @@
 <van-image-preview></van-image-preview>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {ref, onMounted} from 'vue'
 import {useNoteDataStore} from '@/store/noteData'
 import useVideoCount from '@/hooks/useVideoCount.ts'
-import {useRoute} from 'vue-router'
+import {useRoute,useRouter} from 'vue-router'
 import { showImagePreview } from 'vant'
 import share from '@/assets/icon/share.png'
 import like from '@/assets/icon/like.png'
@@ -113,8 +113,11 @@ import comment from '@/assets/icon/comment.png'
 
 
 const route = useRoute()
+const router = useRouter()
 const noteDataStore = useNoteDataStore()
-const {strLength,formatTime} = useVideoCount()
+const {strLength,formatTime,getVideoCount,getVideoDuration} = useVideoCount()
+
+const goUserInfo = (id: string) => router.push(`/userinfo/${id}`)
 
 const onClickLeft = () => history.back();
 const getImg = (imgs, i) => { 

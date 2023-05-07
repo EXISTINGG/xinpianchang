@@ -5,7 +5,7 @@
       <!-- 作者 -->
       <div class="author">
         <div class="author-left">
-          <div class="author-avator">
+          <div class="author-avator" @click="goUserInfo(video.resource.user_id,video.resource.authorized_type)">
             <img
               v-lazy="video.resource.author.userinfo.avatar"
             />
@@ -13,7 +13,7 @@
           </div>
           &nbsp;
           <!-- name>=8 ··· -->
-          <span class="author-name">{{strLength(video.resource.author.userinfo.username) >= 16 ? video.resource.author.userinfo.username.substring(0,6) + '···' : video.resource.author.userinfo.username}}</span> &nbsp;
+          <span class="author-name" @click="goUserInfo(video.resource.user_id,video.resource.authorized_type)">{{strLength(video.resource.author.userinfo.username) >= 16 ? video.resource.author.userinfo.username.substring(0,6) + '···' : video.resource.author.userinfo.username}}</span> &nbsp;
           <span class="vip-img" :class="video.resource.author.userinfo.vip_status === 1 ? 'vip-size' : 'svip-size'" v-if="video.resource.author.userinfo.vip_status != 0"></span> &nbsp;
           <span class="team-count" v-if="video.resource.team_user_count != 0">和其他 <strong>{{video.resource.team_user_count}}</strong> 人</span>
         </div>
@@ -49,9 +49,9 @@
     </router-link>
     <!-- 收藏 -->
     <div class="toolbar-box">
-      <span class="count_collect"><img :src="collectIcon"/>{{getVideoCount(video.resource.count.count_collect)}}</span>
-      <span class="count_comment"><img :src="commentIcon"/>{{getVideoCount(video.resource.count.count_comment)}}</span>
-      <span class="count_like"><img :src="likeIcon"/>{{getVideoCount(video.resource.count.count_like)}}</span>
+      <span class="count_collect"><img :src="collect"/>{{getVideoCount(video.resource.count.count_collect)}}</span>
+      <span class="count_comment"><img :src="comment"/>{{getVideoCount(video.resource.count.count_comment)}}</span>
+      <span class="count_like"><img :src="like"/>{{getVideoCount(video.resource.count.count_like)}}</span>
     </div>
   </div>
 </template>
@@ -59,6 +59,7 @@
 <script setup lang="ts">
 import {ref } from 'vue'
 import useVideoCount from '@/hooks/useVideoCount.ts'
+import {useRouter} from 'vue-router'
 // icon
 import collect from '@/assets/icon/collect.png'
 import collected from '@/assets/icon/collected.png'
@@ -66,11 +67,11 @@ import comment from '@/assets/icon/comment.png'
 import like from '@/assets/icon/like.png'
 import liked from '@/assets/icon/liked.png'
 // icon
-const collectIcon = collect
-const collectedIcon = collected
-const commentIcon = comment
-const likeIcon = like
-const likedIcon = liked
+// const collectIcon = collect
+// const collectedIcon = collected
+// const commentIcon = comment
+// const likeIcon = like
+// const likedIcon = liked
 // 接收父组件的数据
 const props = defineProps({
   video: {
@@ -78,7 +79,13 @@ const props = defineProps({
     required: true
   }
 })
+const router = useRouter()
 const {getVideoDuration, getVideoCount, strLength} = useVideoCount()
+
+const goUserInfo = (id: string, type: number) => {
+  // authorized_type
+  if (type == 1) return router.push(`/userinfo/${id}`)  
+}
 </script>
 
 <style lang="scss" scoped>

@@ -17,7 +17,7 @@
       </div>
       <div class="video-author">
         <div class="name-vip">
-          <span class="name">{{strLength(video.resource.author.userinfo.username) >= 16 ? video.resource.author.userinfo.username.substring(0,6) + '···' : video.resource.author.userinfo.username}}</span>
+          <span class="name" @click.prevent="goUserInfo(video.resource.user_id)">{{strLength(video.resource.author.userinfo.username) >= 16 ? video.resource.author.userinfo.username.substring(0,6) + '···' : video.resource.author.userinfo.username}}</span>
           &nbsp;<span class="vip-icon" :class="video.resource.author.userinfo.vip_status === 1 ? 'vip-size' : 'svip-size'" v-if="video.resource.author.userinfo.vip_status != 0"></span>
         </div>
         <div>:</div>
@@ -29,7 +29,9 @@
 
 <script setup lang="ts">
 import useVideoCount from '@/hooks/useVideoCount.ts'
+import {useRouter} from 'vue-router'
 
+const router = useRouter()
 // 接收父组件的数据
 const props = defineProps({
   video: {
@@ -39,6 +41,9 @@ const props = defineProps({
 })
 
 const {getVideoDuration, getVideoCount, strLength} = useVideoCount()
+
+const goUserInfo = (id: string) => router.push(`/userinfo/${id}`)
+
 </script>
 
 <style lang="scss" scoped>

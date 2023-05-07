@@ -11,7 +11,7 @@
       <!-- 评论 -->
       <div class="comment-box" v-for="item in videoArticleStore.commentsList" :key="item.id">
         <div class="comment-left">
-          <div class="avator">
+          <div class="avator" @click="goUserInfo(item.userInfo.id)">
             <img :src="item.userInfo.avatar">
             <span class="author-v" :class="item.userInfo.author_type === 1 ? 'author-blue-v' : 'author-yellow-v'" v-if="item.userInfo.author_type != 0"></span>
           </div>
@@ -19,7 +19,7 @@
         <div class="comment-right">
             <div class="name-more">
               <div class="name-box">
-                <text class="name">{{item.userInfo.username}}</text>
+                <text class="name" @click="goUserInfo(item.userInfo.id)">{{item.userInfo.username}}</text>
                 <span class="vip-img" :class="item.userInfo.vip_status === 1 ? 'vip-size' : 'svip-size'" v-if="item.userInfo.vip_status != 0"></span>
               </div>
               <span class="more">:</span>
@@ -46,7 +46,7 @@
 import {ref,onMounted} from 'vue'
 import {useVideoArticleStore} from '@/store/videoArticle.ts'
 import useVideoCount from '@/hooks/useVideoCount.ts'
-import {useRoute} from 'vue-router'
+import {useRoute,useRouter} from 'vue-router'
 import comment from '@/assets/icon/comment.png'
 import like from '@/assets/icon/like.png'
 
@@ -55,11 +55,15 @@ const {strLength,formatTime} = useVideoCount()
 const commentIcon = comment
 const likeIcon = like
 const route = useRoute()
+const router = useRouter()
 const id = ref(route.params.id)
 
 const onLoad = () => videoArticleStore.getMoreList(false)
 
 const onRefresh = () => videoArticleStore.getMoreList(true)
+
+const goUserInfo = (id: string) => router.push(`/userinfo/${id}`)
+
 
 videoArticleStore.commentsList = []
 

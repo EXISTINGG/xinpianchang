@@ -65,7 +65,7 @@
         <section v-for="item in articleDataStore.articleComments">
           <div class="comment">
             <div class="comment-left">
-              <div class="avator">
+              <div class="avator" @click="goUserInfo(item.userid)">
                 <img v-lazy="item.userInfo.avatar" />
                 <span
                   class="author-v"
@@ -80,7 +80,7 @@
             </div>
             <div class="comment-right">
               <div class="name">
-                <text>{{ item.userInfo.username }}</text>
+                <text @click="goUserInfo(item.userid)">{{ item.userInfo.username }}</text>
                 <span
                   class="vip-icon"
                   :class="
@@ -135,13 +135,14 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute,useRouter } from 'vue-router'
 import { useArticleDataStore } from '@/store/articleData.ts'
 import useVideoCount from '@/hooks/useVideoCount.ts'
 import like from '@/assets/icon/like.png'
 import EmptyPage from '../EmptyPage.vue'
 
 const route = useRoute()
+const router = useRouter()
 const id = route.params.id
 const articleDataStore = useArticleDataStore()
 const { getVideoDuration, getVideoCount, strLength, formatTime } = useVideoCount()
@@ -151,6 +152,8 @@ const showBtn = ref(false)
 
 const onClickLeft = () => history.back()
 const clearContent = () => addComment.value = ''
+const goUserInfo = (id: string) => router.push(`/userinfo/${id}`)
+
 
 articleDataStore.article = []
 articleDataStore.articleComments = []
