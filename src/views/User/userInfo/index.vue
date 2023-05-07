@@ -7,7 +7,7 @@
   </nav>
   <!-- 作者信息 -->
   <div class="user-info-box">
-    <img class="user-bg" :src="userStore.user.app_background || deFaultBg">
+    <img class="user-bg" :src="userStore.user.app_background || defaultBg">
     <div class="info-box">
       <div class="author-about">
         <div class="avator">
@@ -144,7 +144,7 @@ import {useRoute,useRouter} from 'vue-router'
 import {useUserStore} from '@/store/userData'
 import useVideoCount from '@/hooks/useVideoCount'
 import useGetAge from '@/hooks/useGetAge'
-import deFaultBg from '@/assets/images/default_bg.jpg'
+import defaultBg from '@/assets/images/default_bg.jpg'
 import VideoCard from '@/components/VideoCard.vue'
 import BigVideoCard from '@/components/BigVideoCard.vue'
 
