@@ -5,7 +5,8 @@
       <!-- 作者 -->
       <div class="author">
         <div class="author-left">
-          <div class="author-avator" @click="goUserInfo(video.resource.user_id,video.resource.authorized_type)">
+          <!-- user_id,userid有时数据名不同 -->
+          <div class="author-avator" @click="goUserInfo(video.resource.user_id || video.resource.userid,video.resource.authorized_type)">
             <img
               v-lazy="video.resource.author.userinfo.avatar"
             />
