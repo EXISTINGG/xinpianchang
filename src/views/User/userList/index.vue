@@ -10,7 +10,7 @@
   class="nav-bar"
   @click-left="onClickLeft"/>
 
-  <div class="user-list" v-if="userStore.userFollowers.length != 0">
+  <div class="user-list" v-if="userStore?.userFollowers.length != 0">
     <van-pull-refresh v-model="userStore.follower.refreshing" @refresh="onRefresh">
       <van-list
         v-model:loading="userStore.follower.loading"
