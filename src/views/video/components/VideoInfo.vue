@@ -20,26 +20,26 @@
     </div>
     <div class="tool-bar">
       <div class="like flex">
-        <img :src="likeIcon">
+        <img :src="like">
         <span>{{videoArticleStore.videoArticle.count.count_like}}</span>
       </div>
       <div class="collect flex">
-        <img :src="collectIcon">
+        <img :src="collect">
         <span>{{videoArticleStore.videoArticle.count.count_collect}}</span>
       </div>
       <div class="share flex">
-        <img :src="shareIcon"> 
+        <img :src="share"> 
         <span>{{videoArticleStore.videoArticle.count.count_share}}</span>
       </div>
       <div class="download flex">
-        <img :src="downloadIcon"> 
+        <img :src="download"> 
         <span>下载</span>
       </div>
     </div>
     <div class="tags-box">
-      <router-link v-for="item in videoArticleStore.videoArticle.tags" :key="item.id" to="/*">
+      <div v-for="item in videoArticleStore.videoArticle.tags" :key="item.id" @click="goSearchByKe(item.name)">
         <span class="tag">{{item.name}}</span>
-      </router-link>
+      </div>
     </div>
     <div class="team-box">
       <div class="box-title">
@@ -106,26 +106,27 @@ import collect from '@/assets/icon/collect.png'
 import like from '@/assets/icon/like.png'
 import share from '@/assets/icon/share.png'
 import download from '@/assets/icon/download.png'
-// icon
-const collectIcon = collect
-const likeIcon = like
-const shareIcon = share
-const downloadIcon = download
 
 import {ref,onMounted} from 'vue'
 import {useVideoArticleStore} from '@/store/videoArticle.ts'
+import {useSearchDataStore} from '@/store/searchData'
 import {useRouter,useRoute} from 'vue-router'
 import useVideoCount from '@/hooks/useVideoCount.ts'
 import VideoCard from '@/components/VideoCard.vue'
 
 const videoArticleStore = useVideoArticleStore()
+const searchDataStore = useSearchDataStore()
+
 const router = useRouter()
 const route = useRoute()
 const {getVideoCount, strLength,formatTime} = useVideoCount()
 
 const id = ref(router.currentRoute.value.params.id)
 const goUserInfo = (id: string) => router.push(`/userinfo/${id}`)
-
+const goSearchByKe = (name: string) => {
+  searchDataStore.setHistoryKes(name)
+  router.push(`/searchinfo/${name}`)
+}
 
 videoArticleStore.videoArticle = []
 videoArticleStore.similarVidoe = []

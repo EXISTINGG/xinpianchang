@@ -1,7 +1,7 @@
 <template>
-<SearchBox />
+  <SearchBox />
 
-<van-tabs v-model:active="data.active" class="tabs" color="#e74b3b" title-active-color="#e74b3b" sticky swipeable :offset-top="50" @change="changeTabs">
+<van-tabs v-model:active="data.active" class="tabs" color="#e74b3b" title-active-color="#e74b3b" sticky swipeable :offset-top="1.33333 + 'rem'" @change="changeTabs">
   <van-tab title="作品" class="tab">
     <van-dropdown-menu active-color="#ee0a24">
       <van-dropdown-item v-model="data.value1" :options="data.option1" teleport="body" @change="changeDropdownSort"/>

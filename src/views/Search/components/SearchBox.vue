@@ -38,15 +38,13 @@ const clearInput = () => data.text = ''
 const onClickLeft = () => history.back();
 
 const goSearch = () => {  
-  if (data.text == '') return
+  if (data.text == '' || /\/searchinfo/.test(route.fullPath)) return  
 
   searchDataStore.setHistoryKes(data.text)
 
-  data.text = ''
-
-  // searchDataStore.getresultByKwList(data.text)
-
   router.push(`/searchinfo/${data.text}`)
+
+  data.text = ''
 }
 
 const onFocus = () => router.push('/search')

@@ -41,21 +41,20 @@
 <script setup lang="ts">
 import {reactive,watchEffect, onMounted} from 'vue'
 import {useSearchDataStore} from '@/store/searchData'
-import {useRouter} from 'vue-router'
+import {useRouter,useRoute} from 'vue-router'
 import SearchBox from './components/SearchBox.vue'
 import searchIconPng from '@/assets/icon/search.png'
 
 const searchDataStore = useSearchDataStore()
 const router = useRouter()
-
-const data = reactive({
-
-})
+const route = useRoute()
 
 const removeHistory = () => {
   searchDataStore.removeHistoryKes()
   searchDataStore.historyKes = []
 }
+console.log(route.params);
+
 
 const goSearchByKe = (name: string) => {
   // searchDataStore.getresultByKwList(name)
@@ -69,6 +68,10 @@ onMounted(() => {
   searchDataStore.getHistoryKes()
 
   searchDataStore.getSearchKwsList()
+
+// 视频页的tag
+// searchDataStore.setHistoryKes(route.params.kw)
+
 })
 </script>
 

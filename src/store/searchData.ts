@@ -41,7 +41,15 @@ export const useSearchDataStore = defineStore('searchData', {
 
     // 搜索历史
     setHistoryKes(text: string) {
-      if (!this.historyKes.includes(text)) {
+      // 找出索引
+      let index = this.historyKes.findIndex((item: any) => item === text)
+      // 是否搜索过
+      if (index === -1) {
+        // 如果没有搜索过该词,放入数组最前
+        this.historyKes.splice(0,0,text)
+      } else {
+        // 如果有,将该词放在最前面
+        this.historyKes.splice(index,1)
         this.historyKes.splice(0,0,text)
       }
       setItem('historyKes',this.historyKes)
