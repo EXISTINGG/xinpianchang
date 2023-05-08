@@ -4,8 +4,6 @@ interface VideoCountProps {
   getVideoCount?: (data: number) => void
   strLength?: (str: string) => void
   formatTime?: (timestamp: number) => string
-  // setItem?: (key: string, data: {}) => void
-  // getItem?: (key: string) => void
 }
 
 export default ():VideoCountProps => {

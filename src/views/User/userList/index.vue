@@ -18,11 +18,15 @@
         :immediate-check="false"
         finished-text="没有更多了"
         @load="onLoad">
-          <UserCard class="card" v-for="item in userStore.userFollowers" :key="item.id" :user="item"/>
+          <UserCard class="card" v-for="item in userStore.userFollowers" :key="item.id" :user="item.userinfo"/>
       </van-list>
     </van-pull-refresh>
   </div>
 
+  <div v-if="userStore.showSkeleton">
+    <van-skeleton title avatar :row="3" v-for="item in 6" :key="item"/>
+  </div>
+  
   <div v-else><van-empty :description="`还没有${route.params.title}或已关闭查看权限`" /></div>
   
 </template>
@@ -42,7 +46,11 @@ const onClickLeft = () => history.back();
 const onRefresh = () => userStore.getMoreFollowersList(true)
 const onLoad = () => userStore.getMoreFollowersList()
 
+// 重置页面的finished、loading，以防为true的数据影响页面
+userStore.follower.finished = false
+userStore.follower.loading = false
 userStore.userFollowers = []
+
 onMounted(() => {
   if(route.params.title == '粉丝') {
     userStore.getUserFollowersList(route.params.id)

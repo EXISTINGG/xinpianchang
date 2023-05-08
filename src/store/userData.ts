@@ -9,6 +9,7 @@ export const useUserStore = defineStore('user', {
       userApproved: [] as any,
       userCollect: [] as any,
       userFollowers: [] as any,
+      showSkeleton: false, 
       // 细分finished,loading,loadMoreUrl
       articel: {
         finished: false,
@@ -36,8 +37,15 @@ export const useUserStore = defineStore('user', {
 
   actions: {
     async getUserList(id: string) {
-      const {data} = await getUser(id)
-      this.user = data.data    
+      try {
+        this.showSkeleton = true
+        // 有些用户没有详情页,如xx广告,xx精选,此时,请求404
+        const {data} = await getUser(id)
+        this.showSkeleton = false
+        this.user = data.data   
+      } catch (error) {
+        this.showSkeleton = false
+      }
     },
 
     async getUserArticlesList(id: string) {
@@ -94,23 +102,38 @@ export const useUserStore = defineStore('user', {
 
     // 粉丝
     async getUserFollowersList(id: string) {
-      const {data} = await getUserFollowers(id) 
-      // 特殊情况,用户关闭列表,不展示
-      this.userFollowers = data.data?.list || []
-      console.log(this.userFollowers);
-      
-      this.follower.loadMoreUrl = data.data.next_page_url
+      try {
+        this.showSkeleton = true
+        const {data} = await getUserFollowers(id) 
+        // 特殊情况,用户关闭列表,不展示
+        this.userFollowers = data.data?.list || []
+        this.follower.loadMoreUrl = data.data.next_page_url
+        this.showSkeleton = false
+      } catch (error) {
+        this.showSkeleton = false
+      }
     },
     // 关注
     async getUserFolloweesList(id: string) {
-      const {data} = await getUserFollowees(id)
-      // 特殊情况,用户关闭列表,不展示
-      this.userFollowers = data.data?.list || []
-      this.follower.loadMoreUrl = data.data.next_page_url
+      try {
+        this.showSkeleton = true
+        const {data} = await getUserFollowees(id)
+        // 特殊情况,用户关闭列表,不展示
+        this.userFollowers = data.data?.list || []
+        this.follower.loadMoreUrl = data.data.next_page_url
+        this.showSkeleton = false
+      } catch (error) {
+        this.showSkeleton = false
+      }
     },
     // 加载更多,粉丝/关注
     async getMoreFollowersList(onRefresh?: boolean) {
-      if (this.follower.loadMoreUrl == null || this.follower.loadMoreUrl == '') return this.follower.finished = true
+
+      if (this.follower.loadMoreUrl == null || this.follower.loadMoreUrl == '') {
+          this.follower.finished = true
+      }
+      
+      if (this.follower.finished) return this.follower.refreshing = false
 
       const {data} = await getMore(this.follower.loadMoreUrl)
 

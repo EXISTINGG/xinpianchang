@@ -9,12 +9,12 @@
     <h3 class="title">{{video.title}}</h3>
     <span class="view-like">播放量 {{getVideoCount(video.count.count_view)}} · 喜欢 {{getVideoCount(video.count.count_like)}}</span>
     <div class="author-info">
-      <div class="avator" @click.prevent="goUserInfo(video.userid)">
+      <div class="avator" @click.prevent="goUserInfo(video.userid || video.user_id)">
         <img v-lazy="video.author.userinfo.avatar">
         <span class="author-v" :class="video.author.userinfo.author_type === 1 ? 'author-blue-v' : 'author-yellow-v'" v-if="video.author.userinfo.author_type != 0"></span>
       </div>
       <!-- name >= 8 -->
-      <text class="name" @click.prevent="goUserInfo(video.userid)">{{strLength(video.author.userinfo.username) > 16 ? video.author.userinfo.username.substring(0,6) + '···' : video.author.userinfo.username}}</text>
+      <text class="name" @click.prevent="goUserInfo(video.userid  || video.user_id)">{{strLength(video.author.userinfo.username) > 16 ? video.author.userinfo.username.substring(0,6) + '···' : video.author.userinfo.username}}</text>
       <span class="vip-icon" :class="video.author.userinfo.vip_status === 1 ? 'vip-size' : 'svip-size'" v-if="video.author.userinfo.vip_status != 0"></span>
     </div>
   </div>

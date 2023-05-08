@@ -1,22 +1,22 @@
 <template>
   <section class="user-box">
     <div class="info">
-      <div class="avator" @click="goUserInfo(user.userinfo.id)">
-        <img v-lazy="user.userinfo.avatar">
-        <i class="author-v" :class="user.userinfo.author_type === 1 ? 'author-blue-v' : 'author-yellow-v'" v-if="user.userinfo.author_type != 0"></i>
+      <div class="avator" @click="goUserInfo(user.id)">
+        <img v-lazy="user.avatar">
+        <i class="author-v" :class="user.author_type === 1 ? 'author-blue-v' : 'author-yellow-v'" v-if="user.author_type != 0"></i>
       </div>
       
       <div class="user-info">
         <div class="name-v">
-          <h4 @click="goUserInfo(user.userinfo.id)">{{strLength(user.userinfo.username) >= 20 ? user.userinfo.username.substring(0,10) + '···' : user.userinfo.username}}</h4>
-          <i class="vip-icon" :class="user.userinfo.vip_status === 1 ? 'vip-size' : 'svip-size'" v-if="user.userinfo.vip_status != 0"></i>
+          <h4 @click="goUserInfo(user.id)">{{strLength(user.username) >= 20 ? user.username.substring(0,10) + '···' : user.username}}</h4>
+          <i class="vip-icon" :class="user.vip_status === 1 ? 'vip-size' : 'svip-size'" v-if="user.vip_status != 0"></i>
         </div>
         <div class="data">
-          <i v-if="user.userinfo?.occupation">{{user.userinfo.occupation}} </i>
-          <i v-if="user.userinfo?.occupation && user.userinfo?.ip_location">·</i>
-          <i v-if="user.userinfo?.ip_location">{{user.userinfo.ip_location}}</i>
-          <i v-if="user.userinfo?.ip_location && user.userinfo?.count?.count_follower">·</i>
-          <i v-if="user.userinfo?.count?.count_follower">粉丝 {{getVideoCount(user.userinfo.count.count_follower)}}</i>
+          <i v-if="user?.occupation">{{user.occupation}} </i>
+          <i v-if="user?.occupation && user?.ip_location">·</i>
+          <i v-if="user?.ip_location">{{user.ip_location}}</i>
+          <i v-if="user?.ip_location && user?.count?.count_follower">·</i>
+          <i v-if="user?.count?.count_follower">粉丝 {{getVideoCount(user.count.count_follower)}}</i>
         </div>
       </div>
 

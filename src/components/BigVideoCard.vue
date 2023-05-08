@@ -6,7 +6,7 @@
       <div class="author">
         <div class="author-left">
           <!-- user_id,userid有时数据名不同 -->
-          <div class="author-avator" @click="goUserInfo(video.resource.user_id || video.resource.userid,video.resource.authorized_type)">
+          <div class="author-avator" @click="goUserInfo(video.resource.user_id || video.resource.userid)">
             <img
               v-lazy="video.resource.author.userinfo.avatar"
             />
@@ -14,7 +14,7 @@
           </div>
           &nbsp;
           <!-- name>=8 ··· -->
-          <span class="author-name" @click="goUserInfo(video.resource.user_id,video.resource.authorized_type)">{{strLength(video.resource.author.userinfo.username) >= 16 ? video.resource.author.userinfo.username.substring(0,6) + '···' : video.resource.author.userinfo.username}}</span> &nbsp;
+          <span class="author-name" @click="goUserInfo(video.resource.user_id || video.resource.userid)">{{strLength(video.resource.author.userinfo.username) >= 16 ? video.resource.author.userinfo.username.substring(0,6) + '···' : video.resource.author.userinfo.username}}</span> &nbsp;
           <span class="vip-img" :class="video.resource.author.userinfo.vip_status === 1 ? 'vip-size' : 'svip-size'" v-if="video.resource.author.userinfo.vip_status != 0"></span> &nbsp;
           <span class="team-count" v-if="video.resource.team_user_count != 0">和其他 <strong>{{video.resource.team_user_count}}</strong> 人</span>
         </div>
@@ -78,10 +78,8 @@ const props = defineProps({
 const router = useRouter()
 const {getVideoDuration, getVideoCount, strLength} = useVideoCount()
 
-const goUserInfo = (id: string, type: number) => {
-  // authorized_type
-  if (type == 1) return router.push(`/userinfo/${id}`)  
-}
+const goUserInfo = (id: string) => router.push(`/userinfo/${id}`)  
+
 </script>
 
 <style lang="scss" scoped>

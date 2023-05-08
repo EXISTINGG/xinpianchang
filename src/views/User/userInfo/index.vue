@@ -1,6 +1,6 @@
 <template>
 <!-- userinfo/id:{{route.params.id}} -->
-<div class="user-box">
+<div class="user-box" v-if="userStore.user.length != 0">
   <i class="goBack" :class="data.showNavBar ? 'darkColor' : 'whiteColor'" @click="onClickLeft">返回</i>
   <nav class="nav-bar" ref="navRef" :class="data.showNavBar ? 'flex' : 'none'" :style="{backgroundColor: `rgba(255,255,255,${data.bgOpacity})`}">
     <h3 class="user-name">{{userStore.user.username}}</h3>
@@ -136,10 +136,20 @@
   </div>
   
 </div>
+
+<div v-if="userStore.showSkeleton">
+  <van-skeleton title avatar :row="3" v-for="item in 6" :key="item"/>
+</div>
+
+<div v-else>
+  <van-empty description="该类型用户可能无主页">
+    <van-button round type="primary" class="bottom-button" @click="onClickLeft">返回</van-button>
+  </van-empty>
+</div>
 </template>
 
 <script setup lang='ts'>
-import {ref,reactive,onMounted,onBeforeUnmount,onBeforeUpdate,watch,watchEffect } from 'vue'
+import {ref,reactive,onMounted,onBeforeUnmount,watch,watchEffect } from 'vue'
 import {useRoute,useRouter} from 'vue-router'
 import {useUserStore} from '@/store/userData'
 import useVideoCount from '@/hooks/useVideoCount'
@@ -227,15 +237,11 @@ onBeforeUnmount(() => {
   window.removeEventListener('scroll',getScrollTop)
 })
 
-onBeforeUpdate(() => {
-})
 
 watchEffect(() => {
-  //  console.log(data.showNavBar);
    // 如果展示了nav,获取高度，
    if (data.showNavBar) {
     setTimeout(() => {
-      // console.log(navRef.value.offsetHeight);
       data.navOffsetHeight = navRef.value.offsetHeight
     }, 100)
    }
@@ -551,4 +557,10 @@ $left: 20px;
 
   }
 }
+ .bottom-button {
+    width: 160px;
+    height: 40px;
+    background: $color-primary;
+    border: none;
+  }
 </style>

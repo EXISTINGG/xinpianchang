@@ -52,7 +52,7 @@ onMounted(() => {
     videoArticleStore.getVideoArticeList(id.value)
     setTimeout(() => {
       videoArticleStore.getSimilarVidoeList(id.value)
-    }, 200)
+    }, 100)
 
 videoRef.value.addEventListener('play', () => timer())
 timer()

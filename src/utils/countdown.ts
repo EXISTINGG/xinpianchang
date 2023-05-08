@@ -1,4 +1,3 @@
-
 export default function countdown(date: string): string {
   let year = Number(date.slice(0, 4));
   let month = Number(date.slice(4, 6)); // 修改这行代码
