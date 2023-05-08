@@ -137,14 +137,14 @@
   
 </div>
 
-<div v-if="userStore.showSkeleton">
-  <van-skeleton title avatar :row="3" v-for="item in 6" :key="item"/>
-</div>
-
-<div v-else>
-  <van-empty description="该类型用户可能无主页">
+<div v-if="userStore.user.length == 0 && !userStore.showSkeleton">
+  <van-empty description="加载失败或该类型用户可能无主页">
     <van-button round type="primary" class="bottom-button" @click="onClickLeft">返回</van-button>
   </van-empty>
+</div>
+
+<div v-if="userStore.showSkeleton">
+  <van-skeleton title avatar :row="3" v-for="item in 6" :key="item"/>
 </div>
 </template>
 

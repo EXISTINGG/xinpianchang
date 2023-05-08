@@ -23,11 +23,12 @@
     </van-pull-refresh>
   </div>
 
+  <div v-if="userStore?.userFollowers.length == 0 && !userStore.showSkeleton"><van-empty :description="`还没有${route.params.title}或已关闭查看权限`" /></div>
+
   <div v-if="userStore.showSkeleton">
     <van-skeleton title avatar :row="3" v-for="item in 6" :key="item"/>
   </div>
   
-  <div v-else><van-empty :description="`还没有${route.params.title}或已关闭查看权限`" /></div>
   
 </template>
 
