@@ -87,6 +87,9 @@ const onLoadCreator = () => {
 const changeDropdownSort = (e) => searchDataStore.getresultByKwAndSortList(route.params.kw,e)
 const changeDropdownDownLoad = (e) => searchDataStore.getresultByKwAndSortList(route.params.kw,data.value1,e)
 
+searchDataStore.articleResult = []
+searchDataStore.articleResult = []
+
 onMounted(() => {
   searchDataStore.getresultByKwList(route.params.kw)
 })
